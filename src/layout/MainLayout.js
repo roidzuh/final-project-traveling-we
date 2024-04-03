@@ -5,7 +5,7 @@ export default function MainLayout({ children }) {
   return (
     <>
       <Navbar />
-      <main className="bg-slate-700">{children}</main>
+      <main>{children}</main>
       <Footer />
     </>
   );
