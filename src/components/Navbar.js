@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Button from "./Button";
 import ButtonIcon from "./ButtonIcon";
 import { useEffect, useRef, useState } from "react";
 import { HiMiniBars3, HiXCircle, HiHome, HiMap } from "react-icons/hi2";
+import ButtonLink from "./ButtonLink";
 
 const navLinks = [
   { title: "Home", href: "/", icon: HiHome },
@@ -45,14 +45,8 @@ export default function Navbar() {
         ))}
       </ul>
       <div className="hidden md:flex space-x-4">
-        <Button
-          title="Log In"
-          style={"bg-blue-500 text-white hover:bg-blue-600"}
-        />
-        <Button
-          title="Sign In"
-          style={"bg-blue-500 text-white hover:bg-blue-600"}
-        />
+        <ButtonLink title="Log In" href="/login" />
+        <ButtonLink title="Sign In" href="/signin" />
       </div>
       <div className="md:hidden" ref={menuRef}>
         <ButtonIcon onClick={() => setIsOpen(!isOpen)}>
@@ -76,6 +70,11 @@ export default function Navbar() {
               {link.title}
             </Link>
           ))}
+
+          <div className="flex gap-4 m-2">
+            <ButtonLink title="Log In" href="/login" />
+            <ButtonLink title="Sign In" href="/signin" />
+          </div>
         </ul>
       </div>
     </nav>
