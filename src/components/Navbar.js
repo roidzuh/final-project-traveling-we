@@ -2,17 +2,20 @@ import Link from "next/link";
 import ButtonIcon from "./ButtonIcon";
 import ButtonLink from "./ButtonLink";
 import { navLinks } from "@/utils/data";
-import { useEffect, useRef, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setIsOpen } from "@/features/slices/navbarSlice";
+import { useEffect, useRef } from "react";
 import { HiMiniBars3, HiXCircle } from "react-icons/hi2";
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const isOpen = useSelector((state) => state.navbar.isOpen);
+  const dispatch = useDispatch();
   const menuRef = useRef();
 
   useEffect(() => {
     function handleClickOutside(event) {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsOpen(false);
+        dispatch(setIsOpen(false));
       }
     }
 
@@ -20,7 +23,7 @@ export default function Navbar() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <nav className="bg-white flex items-center justify-between px-12 py-2 z-50 mx-auto max-w[1440px] shadow-xl rounded-full fixed w-[95%] top-4 left-[2.5%]">
@@ -45,7 +48,7 @@ export default function Navbar() {
         <ButtonLink title="Sign In" href="/signup" />
       </div>
       <div className="md:hidden" ref={menuRef}>
-        <ButtonIcon onClick={() => setIsOpen(!isOpen)}>
+        <ButtonIcon onClick={() => dispatch(setIsOpen(!isOpen))}>
           {isOpen ? <HiXCircle /> : <HiMiniBars3 />}
         </ButtonIcon>
 
