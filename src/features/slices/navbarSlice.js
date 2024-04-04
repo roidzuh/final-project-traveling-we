@@ -1,5 +1,3 @@
-// src/features/navbar/navbarSlice.js
-
 import { createSlice } from "@reduxjs/toolkit";
 
 const navbarSlice = createSlice({
