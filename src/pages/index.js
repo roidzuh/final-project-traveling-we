@@ -18,7 +18,7 @@ export default function Home({ banners }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MainLayout>
-        <Hero banners={banners} />
+        <Hero />
       </MainLayout>
     </>
   );
