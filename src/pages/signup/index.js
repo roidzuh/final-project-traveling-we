@@ -12,7 +12,7 @@ export default function SignUpPage() {
     <div className="bg-gray-50 min-h-screen flex items-center justify-center">
       <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5">
         <div className="sm:w-1/2 ">
-          <h1 className="text-2xl font-bold ">Travelo</h1>
+          <h1 className="text-2xl font-bold ">TravelGo</h1>
           <form className="flex flex-col gap-3 px-6 mt-4">
             <p className="text-black font-bold">Register</p>
             <div className="flex gap-4">
@@ -56,7 +56,7 @@ export default function SignUpPage() {
             </p>
           </form>
           <p className="text-gray-400 text-xs mt-6">
-            Copyright © 2024 Travelo. All rights reserved.
+            Copyright © 2024 TravelGo. All rights reserved.
           </p>
         </div>
         <div className="sm:block hidden w-1/2 ">

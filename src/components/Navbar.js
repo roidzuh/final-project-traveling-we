@@ -28,7 +28,7 @@ export default function Navbar() {
   return (
     <nav className="bg-white flex items-center justify-between px-12 py-2 z-50 mx-auto max-w[1440px] shadow-xl rounded-full fixed w-[95%] top-4 left-[2.5%]">
       <Link href="/" className="text-black text-3xl font-bold no-underline">
-        Travelo
+        TravelGo
       </Link>
       <ul className="hidden md:flex gap-4">
         {navLinks.map((link) => (
