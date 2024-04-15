@@ -1,12 +1,22 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import AdminLayout from "@/layout/AdminLayout";
-import { fetchUserLogged } from "@/utils/api";
+import { fetchUser } from "@/features/slices/userSlice";
+import { isAuthenticated } from "@/utils/auth";
 
-// export async function getServerSideProps(context) {
-//   const token = context.req.cookies.token;
-//   const user = await fetchUserLogged(token);
-//   return { props: { user } };
-// }
+export default function DashboardPage() {
+  const dispatch = useDispatch();
+  const router = useRouter();
 
-export default function dashboardPage() {
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      router.push("/login");
+    } else {
+      const token = localStorage.getItem("token");
+      dispatch(fetchUser(token));
+    }
+  }, [dispatch, router]);
+
   return <AdminLayout></AdminLayout>;
 }
