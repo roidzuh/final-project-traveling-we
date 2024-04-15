@@ -1,109 +1,65 @@
 import axios from "axios";
-import Cookies from "js-cookie";
 
 export const BASE_URL = "https://travel-journal-api-bootcamp.do.dibimbing.id/";
 export const API_KEY = "24405e01-fbc1-45a5-9f5a-be13afcd757c";
 
-// export async function fetchUserLogged(token) {
-//   try {
-//     const res = await axios.get(`${BASE_URL}api/v1/user`, {
-//       headers: {
-//         apiKey: API_KEY,
-//         Authorization: `Bearer ${token}`,
-//       },
-//     });
-//     return res?.data?.data || [];
-//   } catch (error) {
-//     console.error("Error fetching users:", error);
-//     return [];
-//   }
-// }
-
-export async function fetchBanners() {
-  try {
-    const res = await axios.get(`${BASE_URL}api/v1/banners`, {
-      headers: {
-        apiKey: API_KEY,
-      },
-    });
-    return res?.data?.data || [];
-  } catch (error) {
-    console.error("Error fetching banners:", error);
-    return [];
+const apiRequest = async (url, method = "get", data = null, token = null) => {
+  const headers = {
+    apiKey: API_KEY,
+  };
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
   }
-}
-
-export async function fetchPromo() {
-  try {
-    const res = await axios.get(`${BASE_URL}api/v1/promos`, {
-      headers: {
-        apiKey: API_KEY,
-      },
-    });
-    return res?.data?.data || [];
-  } catch (error) {
-    console.error("Error fetching promos:", error);
-    return [];
+  const config = {
+    method: method,
+    url: `${BASE_URL}${url}`,
+    headers: headers,
+  };
+  if (data) {
+    config.data = data;
   }
-}
-
-export async function fetchCategory() {
   try {
-    const res = await axios.get(`${BASE_URL}api/v1/categories`, {
-      headers: {
-        apiKey: API_KEY,
-      },
-    });
-    return res?.data?.data || [];
+    const response = await axios(config);
+    return response.data || [];
   } catch (error) {
-    console.error("Error fetching categories:", error);
-    return [];
-  }
-}
-
-export async function fetchActivity() {
-  try {
-    const res = await axios.get(`${BASE_URL}api/v1/activities`, {
-      headers: {
-        apiKey: API_KEY,
-      },
-    });
-    return res?.data?.data || [];
-  } catch (error) {
-    console.error("Error fetching activities:", error);
-    return [];
-  }
-}
-
-export const handleLogin = async (email, password) => {
-  try {
-    const response = await axios.post(
-      `${BASE_URL}api/v1/login`,
-      { email, password },
-      {
-        headers: {
-          apiKey: API_KEY,
-        },
-      }
-    );
-    return response?.data;
-  } catch (error) {
-    throw new Error(error.response.data.message || "Login failed");
+    console.error(`Error fetching ${url}:`, error);
+    return { error: true, message: error.message };
   }
 };
 
-// export const handleLogout = async () => {
-//   try {
-//     const response = await axios.get(`${BASE_URL}api/v1/logout`, {
-//       headers: {
-//         apiKey: API_KEY,
-//         Authorization: `Bearer ${Cookies.get("token")}`,
-//       },
-//     });
-//     return response.data;
-//   } catch (error) {
-//     throw new Error(
-//       error.response?.data?.message || "Logout failed: Unexpected error"
-//     );
-//   }
-// };
+export const fetchBanners = () => apiRequest("api/v1/banners");
+export const fetchPromo = () => apiRequest("api/v1/promos");
+export const fetchCategory = () => apiRequest("api/v1/categories");
+export const fetchActivity = () => apiRequest("api/v1/activities");
+export const fetchUser = (token) =>
+  apiRequest("api/v1/user", "get", null, token);
+
+export const handleLogin = async (email, password) => {
+  try {
+    const response = await apiRequest("api/v1/login", "post", {
+      email,
+      password,
+    });
+    return response;
+  } catch (error) {
+    return {
+      error: true,
+      message: error.response?.data?.message || "Login failed",
+    };
+  }
+};
+
+export const handleLogout = async () => {
+  const token = localStorage.getItem("token");
+  try {
+    const response = await apiRequest("api/v1/logout", "post", null, token);
+    localStorage.removeItem("token");
+    return response;
+  } catch (error) {
+    console.error(`Logout failed:`, error);
+    return {
+      error: true,
+      message: error.response?.data?.message || "Logout failed",
+    };
+  }
+};
