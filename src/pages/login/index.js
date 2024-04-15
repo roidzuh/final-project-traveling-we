@@ -6,17 +6,51 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import { useState } from "react";
+import { handleLogin } from "@/utils/api";
+import { useRouter } from "next/router";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
+
+  const handleSubmitLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await handleLogin(email, password);
+      const token = response.token;
+      localStorage.setItem("token", token);
+      router.replace("/dashboard");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="bg-gray-50 min-h-screen flex items-center justify-center">
       <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5">
         <div className="sm:w-1/2 ">
           <h1 className="text-2xl font-bold ">TravelGo</h1>
-          <form className="flex flex-col gap-4 px-16 mt-20">
+          <form
+            className="flex flex-col gap-4 px-16 mt-20"
+            onSubmit={handleSubmitLogin}
+          >
             <p className="text-black font-bold">Login</p>
-            <Input type="email" name="email" placeholder="Email" />
-            <Input type="password" name="password" placeholder="Password" />
+            <Input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <Button
               title="Login"
               type="submit"
