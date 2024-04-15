@@ -52,7 +52,7 @@ export const handleLogin = async (email, password) => {
 export const handleLogout = async () => {
   const token = localStorage.getItem("token");
   try {
-    const response = await apiRequest("api/v1/logout", "post", null, token);
+    const response = await apiRequest("api/v1/logout", "get", null, token);
     localStorage.removeItem("token");
     return response;
   } catch (error) {
