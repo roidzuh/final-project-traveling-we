@@ -9,15 +9,10 @@ import Cookies from "js-cookie";
 
 export default function Sidebar() {
   const router = useRouter();
-  const logout = async () => {
-    try {
-      const response = await handleLogout();
-      // console.log(response);
-      Cookies.remove("token");
-      router.replace("/login");
-    } catch (error) {
-      console.error("Logout failed", error.message);
-    }
+  const handleSubmitLogout = async () => {
+    const response = await handleLogout();
+    // localStorage.removeItem("token");
+    router.replace("/login");
   };
 
   return (
@@ -37,7 +32,7 @@ export default function Sidebar() {
           style={
             "text-gray-600 items-center gap-4 ml-8 hover:ml-12 absolute bottom-10 w-full"
           }
-          onClick={logout}
+          onClick={handleSubmitLogout}
         >
           <HiArrowLeftOnRectangle className="text-xl transition-all ease-in" />
           <span className="text-lg">Logout</span>
