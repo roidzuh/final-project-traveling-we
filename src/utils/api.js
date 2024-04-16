@@ -33,6 +33,11 @@ export const fetchCategory = () => apiRequest("api/v1/categories");
 export const fetchActivity = () => apiRequest("api/v1/activities");
 export const fetchUser = (token) =>
   apiRequest("api/v1/user", "get", null, token);
+export const fetchAllUser = (token) =>
+  apiRequest("api/v1/all-user", "get", null, token);
+
+export const updateUserRole = (userId, role, token) =>
+  apiRequest(`api/v1/update-user-role/${userId}`, "post", { role }, token);
 
 export const handleLogin = async (email, password) => {
   try {

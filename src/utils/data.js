@@ -18,7 +18,7 @@ export const loginImage = [
 
 export const sidebarLink = [
   { title: "Home", href: "/dashboard", icon: BiHomeSmile },
-  { title: "User", href: "/dashboard/user", icon: AiOutlineUser },
+  { title: "Users", href: "/dashboard/users", icon: AiOutlineUser },
   { title: "Banner", href: "/dashboard/banner", icon: RiAdvertisementLine },
   { title: "Promo", href: "/dashboard/promo", icon: MdLocalOffer },
   { title: "Category", href: "/dashboard/category", icon: BsGrid3X3Gap },
