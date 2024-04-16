@@ -93,7 +93,7 @@ export default function Profile() {
             <div className="flex flex-col gap-2">
               <label className="font-semibold">Name</label>
               <Input
-                label="Nama"
+                placeholder="Name"
                 name="name"
                 value={profile.name}
                 onChange={handleInputChange}
@@ -103,7 +103,7 @@ export default function Profile() {
             <div className="flex flex-col gap-2">
               <label className="font-semibold text-gray-700">Email</label>
               <Input
-                label="Email"
+                placeholder="Email"
                 name="email"
                 value={profile.email}
                 onChange={handleInputChange}
@@ -115,7 +115,7 @@ export default function Profile() {
                 Phone Number
               </label>
               <Input
-                label="phoneNumber"
+                placeholder="Phone Number"
                 name="phoneNumber"
                 value={profile.phoneNumber}
                 onChange={handleInputChange}
@@ -123,7 +123,7 @@ export default function Profile() {
               />
             </div>
             <Button
-              title="Perbarui profil"
+              title="Update Profile"
               style="bg-blue-600 text-white hover:bg-blue-800"
               type="submit"
             />
