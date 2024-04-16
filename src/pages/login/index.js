@@ -9,21 +9,37 @@ import "swiper/css/pagination";
 import { useState } from "react";
 import { handleLogin } from "@/utils/api";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmitLogin = async (e) => {
     e.preventDefault();
+
+    if (!email || !password) return;
+
     try {
+      setIsLoading(true);
       const response = await handleLogin(email, password);
+      if (response.error) {
+        throw new Error(response.message || "Login failed");
+      }
       const token = response.token;
       localStorage.setItem("token", token);
-      router.replace("/dashboard");
+      toast.success("Login successful", {
+        autoClose: 2000,
+      });
+      setTimeout(() => {
+        router.replace("/dashboard");
+      }, 3000);
     } catch (error) {
-      console.error(error);
+      toast.error(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -54,7 +70,8 @@ export default function LoginPage() {
             <Button
               title="Login"
               type="submit"
-              style={"bg-gray-300 hover:bg-gray-400"}
+              style="bg-gray-300 hover:bg-gray-400"
+              isLoading={isLoading}
             />
             <p className="text-gray-700 text-sm">
               Do not have an account? <Link href="/signup">Create one</Link>
