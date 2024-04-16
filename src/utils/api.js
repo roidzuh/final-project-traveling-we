@@ -3,10 +3,14 @@ import axios from "axios";
 export const BASE_URL = "https://travel-journal-api-bootcamp.do.dibimbing.id/";
 export const API_KEY = "24405e01-fbc1-45a5-9f5a-be13afcd757c";
 
-const apiRequest = async (url, method = "get", data = null, token = null) => {
-  const headers = {
-    apiKey: API_KEY,
-  };
+const apiRequest = async (
+  url,
+  method = "get",
+  data = null,
+  token = null,
+  headers = {}
+) => {
+  headers["apiKey"] = API_KEY;
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
@@ -39,6 +43,9 @@ export const fetchAllUser = (token) =>
 export const updateUserRole = (userId, role, token) =>
   apiRequest(`api/v1/update-user-role/${userId}`, "post", { role }, token);
 
+export const updateProfile = (data, token) =>
+  apiRequest("api/v1/update-profile", "post", data, token);
+
 export const handleLogin = async (email, password) => {
   try {
     const response = await apiRequest("api/v1/login", "post", {
@@ -67,4 +74,12 @@ export const handleLogout = async () => {
       message: error.response?.data?.message || "Logout failed",
     };
   }
+};
+
+export const uploadImage = (file, token) => {
+  const formData = new FormData();
+  formData.append("image", file);
+  return apiRequest("api/v1/upload-image", "post", formData, token, {
+    "Content-Type": "multipart/form-data",
+  });
 };
