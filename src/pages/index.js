@@ -4,7 +4,9 @@ import Hero from "@/components/Hero";
 import { fetchBanners } from "../utils/api";
 
 export async function getServerSideProps() {
-  const banners = await fetchBanners();
+  const dataBanners = await fetchBanners();
+  const banners = dataBanners?.data;
+
   return { props: { banners } };
 }
 
