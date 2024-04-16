@@ -10,7 +10,10 @@ const apiRequest = async (
   token = null,
   headers = {}
 ) => {
-  headers["apiKey"] = API_KEY;
+  headers = {
+    ...headers,
+    apiKey: API_KEY,
+  };
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
@@ -26,8 +29,7 @@ const apiRequest = async (
     const response = await axios(config);
     return response.data || [];
   } catch (error) {
-    console.error(`Error fetching ${url}:`, error);
-    return { error: true, message: error.message };
+    return { error: true, message: error.response?.data?.message || "Error" };
   }
 };
 
@@ -54,10 +56,7 @@ export const handleLogin = async (email, password) => {
     });
     return response;
   } catch (error) {
-    return {
-      error: true,
-      message: error.response?.data?.message || "Login failed",
-    };
+    error;
   }
 };
 
@@ -68,7 +67,6 @@ export const handleLogout = async () => {
     localStorage.removeItem("token");
     return response;
   } catch (error) {
-    console.error(`Logout failed:`, error);
     return {
       error: true,
       message: error.response?.data?.message || "Logout failed",
