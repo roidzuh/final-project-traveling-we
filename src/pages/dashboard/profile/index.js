@@ -4,7 +4,7 @@ import AdminLayout from "@/layout/AdminLayout";
 import { fetchUser, uploadImage, updateProfile } from "@/utils/api";
 import { useEffect, useState } from "react";
 
-export default function Profile() {
+export default function ProfilePage() {
   const [profile, setProfile] = useState({
     name: "",
     email: "",
