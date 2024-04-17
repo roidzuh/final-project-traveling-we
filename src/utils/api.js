@@ -34,6 +34,8 @@ const apiRequest = async (
 };
 
 export const fetchBanners = () => apiRequest("api/v1/banners");
+export const fetchBannerById = (bannerId) =>
+  apiRequest(`api/v1/banner/${bannerId}`);
 export const fetchPromo = () => apiRequest("api/v1/promos");
 export const fetchCategory = () => apiRequest("api/v1/categories");
 export const fetchActivity = () => apiRequest("api/v1/activities");

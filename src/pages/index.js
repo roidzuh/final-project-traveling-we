@@ -2,6 +2,7 @@ import Head from "next/head";
 import MainLayout from "@/layout/MainLayout";
 import Hero from "@/components/Hero";
 import { fetchBanners } from "../utils/api";
+import Banner from "@/components/Banner";
 
 export async function getServerSideProps() {
   const dataBanners = await fetchBanners();
@@ -21,6 +22,7 @@ export default function Home({ banners }) {
       </Head>
       <MainLayout>
         <Hero />
+        <Banner banners={banners} />
       </MainLayout>
     </>
   );
