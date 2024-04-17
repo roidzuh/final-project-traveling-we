@@ -34,7 +34,7 @@ export default function LoginPage() {
         autoClose: 2000,
       });
       setTimeout(() => {
-        router.replace("/dashboard");
+        router.replace("/dashboard/users");
       }, 3000);
     } catch (error) {
       toast.error(error.message);
