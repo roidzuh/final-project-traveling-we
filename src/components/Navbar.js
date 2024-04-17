@@ -30,16 +30,16 @@ export default function Navbar() {
       <Link href="/" className="text-black text-3xl font-bold no-underline">
         TravelGo
       </Link>
-      <ul className="hidden md:flex gap-4">
+      <ul className="hidden m-0 md:flex gap-4">
         {navLinks.map((link) => (
           <Link
             href={link.href}
             key={link.title}
-            className="flex gap-2 no-underline relative text-black group"
+            className="flex  items-center gap-2 no-underline relative text-black group"
           >
             <link.icon />
             {link.title}
-            <span className="inline-block absolute h-[2px] w-0 bg-black top-5 transition-all duration-500 group-hover:w-full"></span>
+            <span className="inline-block absolute h-[2px] w-0 bg-black top-6 transition-all duration-500 group-hover:w-full"></span>
           </Link>
         ))}
       </ul>
@@ -55,8 +55,8 @@ export default function Navbar() {
         <ul
           className={
             isOpen
-              ? `bg-slate-100 shadow-md flex flex-col absolute top-14 right-0 rounded-lg py-2 opacity-1 visible translate-y-0 transition-all ease-in duration-300`
-              : `bg-slate-100 shadow-md flex flex-col absolute top-14 right-0 rounded-lg py-2 opacity-0 invisible translate-y-0 transition-all ease-in duration-300`
+              ? `bg-slate-100 p-0 shadow-md flex flex-col absolute top-14 right-0 rounded-lg  py-2 opacity-1 visible translate-y-0 transition-all ease-in duration-300`
+              : `bg-slate-100 p-0 shadow-md flex flex-col absolute top-14 right-0 rounded-lg py-2 opacity-0 invisible translate-y-0 transition-all ease-in duration-300`
           }
         >
           {navLinks.map((link) => (

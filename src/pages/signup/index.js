@@ -10,7 +10,7 @@ import "swiper/css/pagination";
 export default function SignUpPage() {
   return (
     <div className="bg-gray-50 min-h-screen flex items-center justify-center">
-      <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5">
+      <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-4xl p-3">
         <div className="sm:w-1/2 ">
           <h1 className="text-2xl font-bold ">TravelGo</h1>
           <form className="flex flex-col gap-3 px-6 mt-4">
