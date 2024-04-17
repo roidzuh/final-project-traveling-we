@@ -83,3 +83,12 @@ export const uploadImage = (file, token) => {
     "Content-Type": "multipart/form-data",
   });
 };
+
+export const deleteBanner = (bannerId, token) =>
+  apiRequest(`api/v1/delete-banner/${bannerId}`, "delete", null, token);
+
+export const updateBanner = (bannerId, data, token) =>
+  apiRequest(`api/v1/update-banner/${bannerId}`, "post", data, token);
+
+export const createBanner = (data, token) =>
+  apiRequest("api/v1/create-banner", "post", data, token);
