@@ -3,6 +3,7 @@ import Input from "@/components/Input";
 import AdminLayout from "@/layout/AdminLayout";
 import { fetchUser, uploadImage, updateProfile } from "@/utils/api";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState({
@@ -43,19 +44,22 @@ export default function ProfilePage() {
 
   const handleImageUpload = async () => {
     if (!selectedFile) {
-      alert("Please select a file first.");
+      toast.error("Please select a file first.");
       return;
     }
     const token = localStorage.getItem("token");
     const response = await uploadImage(selectedFile, token);
     if (response.error) {
-      alert("Failed to upload image.");
+      toast.error(response.message);
     } else {
       setProfile((prevState) => ({
         ...prevState,
         profilePictureUrl: response.url,
       }));
-      alert("Image updated successfully.");
+
+      const updatedProfile = { ...profile, profilePictureUrl: response.url };
+      // localStorage.setItem("user", JSON.stringify(updatedProfile));
+      toast.success(response.message);
     }
   };
 
@@ -64,9 +68,10 @@ export default function ProfilePage() {
     const token = localStorage.getItem("token");
     const response = await updateProfile(profile, token);
     if (response.error) {
-      alert("Failed to update profile.");
+      toast.error(response.message);
     } else {
-      alert("Profile updated successfully.");
+      localStorage.setItem("user", JSON.stringify(profile));
+      toast.success(response.message);
     }
   };
 
