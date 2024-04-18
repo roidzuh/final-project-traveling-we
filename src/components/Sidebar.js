@@ -1,18 +1,25 @@
 import Link from "next/link";
 import ButtonIcon from "./ButtonIcon";
-import { FaRightLong, FaLeftLong } from "react-icons/fa6";
 import { sidebarLink } from "@/utils/data";
 import { HiArrowLeftOnRectangle } from "react-icons/hi2";
 import { handleLogout } from "@/utils/api";
 import { useRouter } from "next/router";
-import Cookies from "js-cookie";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function Sidebar() {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
   const handleSubmitLogout = async () => {
+    setLoading(true);
     const response = await handleLogout();
-    // localStorage.removeItem("token");
-    router.replace("/login");
+    if (!response.error) {
+      router.replace("/login");
+    } else {
+      toast.error(response.message);
+    }
+    setLoading(false);
   };
 
   return (
@@ -34,8 +41,14 @@ export default function Sidebar() {
           }
           onClick={handleSubmitLogout}
         >
-          <HiArrowLeftOnRectangle className="text-xl transition-all ease-in" />
-          <span className="text-lg">Logout</span>
+          {loading ? (
+            <span className="text-lg">Logging out...</span>
+          ) : (
+            <>
+              <HiArrowLeftOnRectangle className="text-xl transition-all ease-in" />
+              <span className="text-lg">Logout</span>
+            </>
+          )}
         </ButtonIcon>
       </nav>
     </aside>
