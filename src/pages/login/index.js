@@ -30,6 +30,7 @@ export default function LoginPage() {
       }
       const token = response.token;
       localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(response.data));
       toast.success("Login successful", {
         autoClose: 2000,
       });
