@@ -3,10 +3,13 @@
 export default function Hero() {
   return (
     <div
-      className="relative h-screen flex items-center justify-center text-center bg-cover bg-center"
-      style={{ backgroundImage: "url('/hero-img.jpg')" }}
+      className="relative min-h-[600px] h-screen text-center bg-cover bg-center"
+      style={{
+        backgroundImage:
+          "linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7)), url('/hero-img.jpg')",
+      }}
     >
-      <div className="z-10 px-6 sm:px-8 lg:px-12">
+      <div className="z-10 px-6 sm:px-8 lg:px-12 relative top-36">
         <h1 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
           Explore the World With Us
         </h1>
