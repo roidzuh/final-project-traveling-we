@@ -67,6 +67,7 @@ export const handleLogout = async () => {
   try {
     const response = await apiRequest("api/v1/logout", "get", null, token);
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     return response;
   } catch (error) {
     return {
@@ -87,8 +88,17 @@ export const uploadImage = (file, token) => {
 export const deleteBanner = (bannerId, token) =>
   apiRequest(`api/v1/delete-banner/${bannerId}`, "delete", null, token);
 
+export const deletePromo = (promoId, token) =>
+  apiRequest(`api/v1/delete-promo/${promoId}`, "delete", null, token);
+
+export const deleteCategory = (categoryId, token) =>
+  apiRequest(`api/v1/delete-category/${categoryId}`, "delete", null, token);
+
 export const updateBanner = (bannerId, data, token) =>
   apiRequest(`api/v1/update-banner/${bannerId}`, "post", data, token);
 
 export const createBanner = (data, token) =>
   apiRequest("api/v1/create-banner", "post", data, token);
+
+export const registerUser = (data) =>
+  apiRequest("api/v1/register", "post", data);
