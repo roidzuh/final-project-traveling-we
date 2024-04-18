@@ -24,7 +24,7 @@ export default function Sidebar() {
 
   return (
     <aside className="h-full">
-      <nav className="bg-slate-200 flex flex-col shadow-lg rounded-lg min-h-[87vh] relative top-6 transition-all ease-in hover:shadow-none">
+      <nav className="bg-slate-200 flex flex-col shadow-lg rounded-lg min-h-[365px] h-[87vh] relative top-6 transition-all ease-in hover:shadow-none">
         {sidebarLink.map((link) => (
           <Link
             href={link.href}
