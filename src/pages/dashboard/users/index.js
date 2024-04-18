@@ -31,18 +31,16 @@ export default function UsersPage() {
           user.id === userId ? { ...user, role: newRole } : user
         )
       );
-      toast.success("Role updated successfully");
+      toast.success(response.message);
     } else {
-      toast.error("Failed to update role");
+      toast.error(response.message);
     }
   };
 
-  // Dapatkan index user terakhir dan pertama
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+  const currentUsers = users?.slice(indexOfFirstUser, indexOfLastUser);
 
-  // Ubah halaman
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
@@ -64,7 +62,7 @@ export default function UsersPage() {
                 </tr>
               </thead>
               <tbody>
-                {currentUsers.map((user) => (
+                {currentUsers?.map((user) => (
                   <tr className="bg-gray-200" key={user.id}>
                     <td className="border px-4 py-2 flex items-center gap-4">
                       <div>
@@ -94,7 +92,7 @@ export default function UsersPage() {
               </tbody>
             </table>
             <Pagination
-              itemsCount={users.length}
+              itemsCount={users?.length}
               pageSize={usersPerPage}
               currentPage={currentPage}
               onPageChange={paginate}
