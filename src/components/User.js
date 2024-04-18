@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { fetchUser } from "@/utils/api";
+import { useState, useEffect } from "react";
 import ButtonIcon from "./ButtonIcon";
 import { HiMiniUser } from "react-icons/hi2";
 import { useRouter } from "next/router";
@@ -9,12 +8,10 @@ export default function User() {
   const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const getUser = async () => {
-      const fetchedUser = await fetchUser(token);
-      setUser(fetchedUser?.data);
-    };
-    getUser();
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
   }, []);
 
   return (
