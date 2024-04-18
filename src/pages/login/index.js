@@ -95,7 +95,7 @@ export default function LoginPage() {
               dynamicBullets: true,
             }}
             modules={[Autoplay, Pagination]}
-            className="w-[100%] h-[100%]"
+            className="mySwiper w-[100%] h-[100%]"
           >
             {loginImage.map((image) => (
               <SwiperSlide key={image.id}>
