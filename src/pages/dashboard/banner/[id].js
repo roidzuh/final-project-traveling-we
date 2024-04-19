@@ -74,31 +74,68 @@ export default function EditBannerPage() {
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <div className="container mx-auto mt-5">
-          <h1 className="text-2xl font-bold mb-5">Edit Banner</h1>
-          <form onSubmit={handleSubmit}>
-            <Input
-              label="name"
-              name="name"
-              type="text"
-              value={banner.name}
-              onChange={handleInputChange}
-            />
-            <Input
-              label="Image File"
-              name="imageFile"
-              type="file"
-              onChange={handleInputChange}
-            />
-            <Button
-              title="Update Banner"
-              type="submit"
-              style={
-                "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2"
-              }
-            />
-          </form>
-        </div>
+        <>
+          <div className="mx-auto mt-5 bg-white p-5 rounded-lg shadow max-w-[900px]">
+            <div className="flex gap-5 items-center">
+              <img
+                src={banner.imageUrl}
+                alt={banner.name}
+                className="w-64 h-64 object-cover rounded-lg"
+              />
+              <div>
+                <p className="text-lg font-semibold">ID: {banner.id}</p>
+                <p className="text-lg font-semibold">Name: {banner.name}</p>
+                <p className="text-lg font-semibold">
+                  Created At:{" "}
+                  {new Date(banner.createdAt).toLocaleDateString("id-ID", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
+                <p className="text-lg font-semibold">
+                  Updated At:{" "}
+                  {new Date(banner.updatedAt).toLocaleDateString("id-ID", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mx-auto mt-5 bg-white p-5 rounded-lg shadow max-w-[900px]">
+            <h1 className="text-2xl font-bold mb-4">Edit Banner</h1>
+            <form onSubmit={handleSubmit}>
+              <div className="flex flex-col gap-3">
+                <Input
+                  label="name"
+                  name="name"
+                  type="text"
+                  placeholder={"Banner Name"}
+                  value={banner.name}
+                  onChange={handleInputChange}
+                />
+                <Input
+                  label="Image File"
+                  name="imageFile"
+                  type="file"
+                  onChange={handleInputChange}
+                />
+                <Button
+                  title="Update Banner"
+                  type="submit"
+                  style={
+                    "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2 self-end"
+                  }
+                />
+              </div>
+            </form>
+          </div>
+        </>
       )}
     </AdminLayout>
   );

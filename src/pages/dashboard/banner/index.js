@@ -1,10 +1,11 @@
 import AdminLayout from "@/layout/AdminLayout";
 import { useEffect, useState } from "react";
 import { fetchBanners, deleteBanner } from "@/utils/api";
-import Button from "@/components/Button";
 import { toast } from "react-toastify";
 import Pagination from "@/components/Pagination";
 import Link from "next/link";
+import ButtonIcon from "@/components/ButtonIcon";
+import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi2";
 
 export default function BannerPage() {
   const [banners, setBanners] = useState([]);
@@ -36,7 +37,6 @@ export default function BannerPage() {
   const indexOfFirstBanner = indexOfLastBanner - bannersPerPage;
   const currentBanners = banners.slice(indexOfFirstBanner, indexOfLastBanner);
 
-  // Ubah halaman
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
@@ -78,18 +78,20 @@ export default function BannerPage() {
                       />
                     </td>
                     <td className="border px-4 py-2">
-                      <Button
-                        title={"Delete"}
-                        style="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                        onClick={() => handleDelete(banner.id)}
-                      />
-
-                      <Link
-                        href={`/dashboard/banner/${banner.id}`}
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2 no-underline"
-                      >
-                        Edit
-                      </Link>
+                      <div className="flex items-center justify-center gap-4">
+                        <ButtonIcon
+                          style="text-black font-bold"
+                          onClick={() => handleDelete(banner.id)}
+                        >
+                          <HiOutlineTrash />
+                        </ButtonIcon>
+                        <Link
+                          href={`/dashboard/banner/${banner.id}`}
+                          className="text-3xl text-black font-bold no-underline"
+                        >
+                          <HiOutlinePencil />
+                        </Link>
+                      </div>
                     </td>
                   </tr>
                 ))}

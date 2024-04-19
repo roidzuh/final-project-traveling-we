@@ -57,41 +57,48 @@ export default function CreateBanner() {
 
   return (
     <AdminLayout>
-      <div className="p-4">
-        {loading ? (
-          <div>Loading...</div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label htmlFor="name" className="block mb-2">
-                Nama Banner:
-              </label>
-              <Input
-                name="name"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                style="border p-2 w-full"
-              />
-            </div>
-            <div>
-              <label htmlFor="image" className="block mb-2">
-                Gambar Banner:
-              </label>
-              <Input
-                type="file"
-                name="image"
-                style="border p-2 w-full"
-                onChange={handleImageChange}
-              />
-            </div>
-            <Button
-              title="Create Banner"
-              type="submit"
-              style="bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
-            />
-          </form>
-        )}
+      <div className="flex justify-center mt-10">
+        <div className="p-4 bg-slate-200 rounded w-full max-w-[900px] shadow-md">
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <>
+              <h5 className="text-2xl font-bold mb-4">Create Banner</h5>
+              <form onSubmit={handleSubmit}>
+                <div className="flex flex-col gap-4">
+                  <div>
+                    <label htmlFor="name" className="block mb-2">
+                      Banner Name :
+                    </label>
+                    <Input
+                      name="name"
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      style="border p-2 w-full "
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="image" className="block mb-2">
+                      Banner Image :
+                    </label>
+                    <Input
+                      type="file"
+                      name="image"
+                      style="border p-2 w-full "
+                      onChange={handleImageChange}
+                    />
+                  </div>
+                  <Button
+                    title="Create Banner"
+                    type="submit"
+                    style="bg-blue-500 text-white p-2 rounded hover:bg-blue-700 self-end"
+                  />
+                </div>
+              </form>
+            </>
+          )}
+        </div>
       </div>
     </AdminLayout>
   );
