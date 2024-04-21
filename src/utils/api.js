@@ -37,8 +37,14 @@ export const fetchBanners = () => apiRequest("api/v1/banners");
 export const fetchBannerById = (bannerId) =>
   apiRequest(`api/v1/banner/${bannerId}`);
 export const fetchPromo = () => apiRequest("api/v1/promos");
+export const fetchPromoById = (promoId) =>
+  apiRequest(`api/v1/promo/${promoId}`);
 export const fetchCategory = () => apiRequest("api/v1/categories");
 export const fetchActivity = () => apiRequest("api/v1/activities");
+export const fetchActivityById = (activityId) =>
+  apiRequest(`api/v1/activity/${activityId}`);
+export const fetchActivityByCategoryId = (categoryId) =>
+  apiRequest(`api/v1/activities-by-category/${categoryId}`);
 export const fetchUser = (token) =>
   apiRequest("api/v1/user", "get", null, token);
 export const fetchAllUser = (token) =>
@@ -96,6 +102,9 @@ export const deleteCategory = (categoryId, token) =>
 
 export const updateBanner = (bannerId, data, token) =>
   apiRequest(`api/v1/update-banner/${bannerId}`, "post", data, token);
+
+export const updatePromo = (promoId, data, token) =>
+  apiRequest(`api/v1/update-promo/${promoId}`, "post", data, token);
 
 export const createBanner = (data, token) =>
   apiRequest("api/v1/create-banner", "post", data, token);
