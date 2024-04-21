@@ -22,6 +22,17 @@ export default function SignUpPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !password ||
+      !passwordRepeat ||
+      !phoneNumber
+    ) {
+      toast.error("Please fill all the fields");
+      return;
+    }
     if (password !== passwordRepeat) {
       toast.error("Passwords do not match");
       return;
@@ -45,7 +56,7 @@ export default function SignUpPage() {
         phoneNumber,
       });
       if (response.error) {
-        throw new Error(response.message || "Registration failed");
+        throw new Error(response.message);
       }
       toast.success("Registration successful", {
         autoClose: 2000,
