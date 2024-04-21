@@ -1,5 +1,5 @@
 import AdminLayout from "@/layout/AdminLayout";
 
-export default function Activity() {
+export default function ActivityPageDashboard() {
   return <AdminLayout>Activity</AdminLayout>;
 }

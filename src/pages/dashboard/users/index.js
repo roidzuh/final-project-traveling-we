@@ -6,11 +6,11 @@ import { toast } from "react-toastify";
 import AdminLayout from "@/layout/AdminLayout";
 import Pagination from "@/components/Pagination";
 
-export default function UsersPage() {
+export default function UsersPageDashboard() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage] = useState(5);
+  const [usersPerPage] = useState(12);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -51,53 +51,50 @@ export default function UsersPage() {
         </div>
       ) : (
         <div className="container mx-auto mt-5">
-          <div className="overflow-x-auto">
-            <table className="min-w-full border-collapse border border-gray-800">
-              <thead>
-                <tr className="bg-gray-800 text-white">
-                  <th className="px-4 py-2">Name</th>
-                  <th className="px-4 py-2">Phone Number</th>
-                  <th className="px-4 py-2">Role</th>
-                  <th className="px-4 py-2">Update Role</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentUsers?.map((user) => (
-                  <tr className="bg-gray-200" key={user.id}>
-                    <td className="border px-4 py-2 flex items-center gap-4">
-                      <div>
-                        <h5>{user.name}</h5>
-                        <p>{user.email}</p>
-                      </div>
-                    </td>
-                    <td className="border px-4 py-2">{user.phoneNumber}</td>
-                    <td className="border px-4 py-2">{user.role}</td>
-                    <td className="border px-4 py-2">
-                      {user.role.toLowerCase() !== "admin" ? (
-                        <Button
-                          title={"Update to Admin"}
-                          style={"bg-blue-500 text-white hover:bg-blue-700"}
-                          onClick={() => handleRoleUpdate(user.id, "admin")}
-                        />
-                      ) : (
-                        <Button
-                          title={"Already Admin"}
-                          style={"bg-gray-500 text-white cursor-not-allowed"}
-                          disabled={true}
-                        />
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <Pagination
-              itemsCount={users?.length}
-              pageSize={usersPerPage}
-              currentPage={currentPage}
-              onPageChange={paginate}
-            />
+          <div className="flex flex-wrap -mx-4">
+            {currentUsers?.map((user) => (
+              <div className="w-full md:w-1/2 lg:w-1/3 px-4 mb-4" key={user.id}>
+                <div className="bg-white shadow rounded-lg overflow-hidden">
+                  <div className="p-4 flex flex-col items-center">
+                    <img
+                      src={user.profilePictureUrl}
+                      alt="Profile"
+                      className="w-24 h-24 rounded-full mb-4"
+                    />
+                    <h5 className="text-gray-900 font-bold text-xl">
+                      {user.name}
+                    </h5>
+                    <p className="text-gray-700">{user.email}</p>
+                  </div>
+                  <div className="p-4 border-t border-gray-200">
+                    <p className="text-gray-600">Phone: {user.phoneNumber}</p>
+                    <p className="text-gray-600">Role: {user.role}</p>
+                  </div>
+                  <div className="p-4 border-t border-gray-200 text-right">
+                    {user.role.toLowerCase() !== "admin" ? (
+                      <Button
+                        title={"Update to Admin"}
+                        style={"bg-blue-500 text-white hover:bg-blue-600"}
+                        onClick={() => handleRoleUpdate(user.id, "admin")}
+                      />
+                    ) : (
+                      <Button
+                        title={"Already Admin"}
+                        style={"bg-gray-400 text-white cursor-not-allowed"}
+                        disabled={true}
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
+          <Pagination
+            itemsCount={users?.length}
+            pageSize={usersPerPage}
+            currentPage={currentPage}
+            onPageChange={paginate}
+          />
         </div>
       )}
     </AdminLayout>

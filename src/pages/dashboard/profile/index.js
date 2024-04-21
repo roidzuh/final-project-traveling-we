@@ -5,7 +5,7 @@ import { fetchUser, uploadImage, updateProfile } from "@/utils/api";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-export default function ProfilePage() {
+export default function ProfilePageDashboard() {
   const [profile, setProfile] = useState({
     name: "",
     email: "",
@@ -17,15 +17,19 @@ export default function ProfilePage() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     const getProfile = async () => {
-      const fetchedProfile = await fetchUser(token);
-      setProfile(
-        fetchedProfile?.data || {
-          name: "",
-          email: "",
-          phoneNumber: "",
-          profilePictureUrl: "",
-        }
-      );
+      try {
+        const fetchedProfile = await fetchUser(token);
+        setProfile(
+          fetchedProfile?.data || {
+            name: "",
+            email: "",
+            phoneNumber: "",
+            profilePictureUrl: "",
+          }
+        );
+      } catch (error) {
+        toast.error("Failed to fetch profile.");
+      }
     };
     getProfile();
   }, []);
@@ -48,36 +52,42 @@ export default function ProfilePage() {
       return;
     }
     const token = localStorage.getItem("token");
-    const response = await uploadImage(selectedFile, token);
-    if (response.error) {
-      toast.error(response.message);
-    } else {
-      setProfile((prevState) => ({
-        ...prevState,
-        profilePictureUrl: response.url,
-      }));
-
-      const updatedProfile = { ...profile, profilePictureUrl: response.url };
-      // localStorage.setItem("user", JSON.stringify(updatedProfile));
-      toast.success(response.message);
+    try {
+      const response = await uploadImage(selectedFile, token);
+      if (response.error) {
+        toast.error(response.message);
+      } else {
+        setProfile((prevState) => ({
+          ...prevState,
+          profilePictureUrl: response.url,
+        }));
+        toast.success("Image uploaded successfully.");
+      }
+    } catch (error) {
+      toast.error("Failed to upload image.");
     }
   };
 
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
-    const response = await updateProfile(profile, token);
-    if (response.error) {
-      toast.error(response.message);
-    } else {
-      localStorage.setItem("user", JSON.stringify(profile));
-      toast.success(response.message);
+    try {
+      const response = await updateProfile(profile, token);
+      if (response.error) {
+        toast.error(response.message);
+      } else {
+        localStorage.setItem("user", JSON.stringify(profile));
+        toast.success("Profile updated successfully.");
+        window.location.reload(); // Menambahkan baris ini untuk reload halaman setelah berhasil update
+      }
+    } catch (error) {
+      toast.error("Failed to update profile.");
     }
   };
 
   return (
     <AdminLayout>
-      <div className="w-full bg-slate-100 min-h-screen rounded-xl p-4 md:p-8">
+      <div className="w-full bg-slate-100 h-[calc(100vh-10rem)] min-h-[600px] rounded-xl p-4 md:p-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center justify-center">
           <div className="text-center">
             <img

@@ -7,7 +7,7 @@ import Link from "next/link";
 import ButtonIcon from "@/components/ButtonIcon";
 import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi2";
 
-export default function BannerPage() {
+export default function BannerPageDashboard() {
   const [banners, setBanners] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);

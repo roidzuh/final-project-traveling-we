@@ -1,12 +1,13 @@
 import AdminLayout from "@/layout/AdminLayout";
 import { useEffect, useState } from "react";
 import { fetchCategory, deleteCategory } from "@/utils/api";
-import Button from "@/components/Button";
 import { toast } from "react-toastify";
 import Pagination from "@/components/Pagination";
 import Link from "next/link";
+import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi2";
+import ButtonIcon from "@/components/ButtonIcon";
 
-export default function CategoryPage() {
+export default function CategoryPageDashboard() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -41,7 +42,6 @@ export default function CategoryPage() {
     indexOfLastCategory
   );
 
-  // Ubah halaman
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
@@ -83,18 +83,20 @@ export default function CategoryPage() {
                       />
                     </td>
                     <td className="border px-4 py-2">
-                      <Button
-                        title={"Delete"}
-                        style="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                        onClick={() => handleDelete(category.id)}
-                      />
-
-                      <Link
-                        href={`/dashboard/category/${category.id}`}
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2 no-underline"
-                      >
-                        Edit
-                      </Link>
+                      <div className="flex items-center justify-center gap-4">
+                        <ButtonIcon
+                          style="text-black font-bold"
+                          onClick={() => handleDelete(category.id)}
+                        >
+                          <HiOutlineTrash />
+                        </ButtonIcon>
+                        <Link
+                          href={`/dashboard/category/${category.id}`}
+                          className="text-3xl text-black font-bold no-underline"
+                        >
+                          <HiOutlinePencil />
+                        </Link>
+                      </div>
                     </td>
                   </tr>
                 ))}

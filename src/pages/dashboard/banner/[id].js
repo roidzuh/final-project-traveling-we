@@ -47,7 +47,7 @@ export default function EditBannerPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Mulai loading
+    setLoading(true);
     const token = localStorage.getItem("token");
     let imageUrl = banner.imageUrl;
     if (imageFile) {
@@ -75,7 +75,7 @@ export default function EditBannerPage() {
         <div>Loading...</div>
       ) : (
         <>
-          <div className="mx-auto mt-5 bg-white p-5 rounded-lg shadow max-w-[900px]">
+          <div className="mx-auto my-5 bg-white p-5 rounded-lg shadow max-w-[900px]">
             <div className="flex gap-5 items-center">
               <img
                 src={banner.imageUrl}
@@ -107,7 +107,7 @@ export default function EditBannerPage() {
             </div>
           </div>
 
-          <div className="mx-auto mt-5 bg-white p-5 rounded-lg shadow max-w-[900px]">
+          <div className="mx-auto my-5 bg-white p-5 rounded-lg shadow max-w-[900px]">
             <h1 className="text-2xl font-bold mb-4">Edit Banner</h1>
             <form onSubmit={handleSubmit}>
               <div className="flex flex-col gap-3">
