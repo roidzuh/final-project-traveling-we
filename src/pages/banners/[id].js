@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import Head from "next/head";
 import MainLayout from "@/layout/MainLayout";
 import { fetchBannerById } from "../../utils/api";
 import { Container, Row, Col, Card } from "react-bootstrap";
