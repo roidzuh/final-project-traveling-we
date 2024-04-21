@@ -20,7 +20,10 @@ export default function LoginPage() {
   const handleSubmitLogin = async (e) => {
     e.preventDefault();
 
-    if (!email || !password) return;
+    if (!email || !password) {
+      toast.error("Please fill all the fields");
+      return;
+    }
 
     try {
       setIsLoading(true);
