@@ -16,4 +16,5 @@ module.exports = {
     },
   },
   plugins: [],
+  prefix: "tw-",
 };
