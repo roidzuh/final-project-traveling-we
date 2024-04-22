@@ -1,13 +1,34 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/autoplay";
-import { Pagination, Autoplay } from "swiper/modules";
-import { useDispatch } from "react-redux";
-import { setIsOpen } from "@/features/slices/navbarSlice";
+import Slider from "react-slick";
 
 export default function Category({ categories }) {
-  const dispatch = useDispatch();
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    prevArrow: <></>,
+    nextArrow: <></>,
+    responsive: [
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+    autoplay: true,
+    autoplaySpeed: 2500,
+    pauseOnHover: true,
+  };
 
   return (
     <div className="tw-absolute tw-w-full ">
@@ -17,32 +38,9 @@ export default function Category({ categories }) {
           <p>&quot;Find your best experience&quot;</p>
         </div>
         <div className="tw-px-4 md:tw-px-16 lg:tw-px-16 ">
-          <Swiper
-            breakpoints={{
-              640: {
-                slidesPerView: 1,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 2,
-                spaceBetween: 30,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 30,
-              },
-            }}
-            pagination={{ clickable: true }}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
-            }}
-            modules={[Pagination, Autoplay]}
-            className="mySwiper"
-            onClick={() => dispatch(setIsOpen())}
-          >
+          <Slider {...settings}>
             {categories?.map((category) => (
-              <SwiperSlide key={category.id} className="tw-group">
+              <div key={category.id} className="tw-group tw-px-4">
                 <div className="tw-relative">
                   <img
                     src={category.imageUrl}
@@ -55,9 +53,9 @@ export default function Category({ categories }) {
                     </span>
                   </div>
                 </div>
-              </SwiperSlide>
+              </div>
             ))}
-          </Swiper>
+          </Slider>
         </div>
       </div>
     </div>

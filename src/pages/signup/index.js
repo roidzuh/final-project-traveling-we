@@ -2,10 +2,7 @@ import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Link from "next/link";
 import { loginImage } from "@/utils/data";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
+import Slider from "react-slick";
 import { useState } from "react";
 import { registerUser } from "@/utils/api";
 import { useRouter } from "next/router";
@@ -69,10 +66,23 @@ export default function SignUpPage() {
     }
   };
 
+  // Pengaturan untuk Slider
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2500,
+    prevArrow: <></>,
+    nextArrow: <></>,
+  };
+
   return (
     <div className="tw-bg-gray-50 tw-min-h-screen tw-flex tw-items-center tw-justify-center">
       <div className="tw-bg-gray-100 tw-flex tw-rounded-2xl tw-shadow-lg tw-max-w-4xl tw-p-3">
-        <div className="sm:tw-w-1/2 ">
+        <div className="md:tw-w-1/2 ">
           <h1 className="tw-text-2xl tw-font-bold ">TravelGo</h1>
           <form
             className="tw-flex tw-flex-col tw-gap-3 tw-px-6 tw-mt-4"
@@ -138,31 +148,18 @@ export default function SignUpPage() {
             Copyright © 2024 TravelGo. All rights reserved.
           </p>
         </div>
-        <div className="sm:tw-block hidden tw-w-1/2 ">
-          <Swiper
-            spaceBetween={30}
-            centeredSlides={true}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
-            }}
-            pagination={{
-              clickable: true,
-              dynamicBullets: true,
-            }}
-            modules={[Autoplay, Pagination]}
-            className="mySwiper tw-w-[100%] tw-h-[100%]"
-          >
+        <div className="md:tw-block tw-hidden tw-w-1/2 ">
+          <Slider {...settings}>
             {loginImage.map((image) => (
-              <SwiperSlide key={image.id}>
+              <div key={image.id}>
                 <img
                   src={image.image}
                   alt={image.title}
-                  className="tw-flex tw-items-center tw-justify-center tw-w-full tw-h-full tw-object-cover tw-rounded-3xl"
+                  className="tw-flex tw-items-center tw-justify-center tw-w-full tw-h-[490px] tw-object-cover tw-rounded-3xl"
                 />
-              </SwiperSlide>
+              </div>
             ))}
-          </Swiper>
+          </Slider>
         </div>
       </div>
     </div>
