@@ -1,7 +1,7 @@
 export default function ButtonIcon({ children, onClick, style }) {
   return (
     <button
-      className={`${style} flex bg-transparent  border-none transition-all ease-in duration-300 cursor-pointer text-3xl`}
+      className={`${style} tw-flex tw-bg-transparent tw-border-none tw-transition-all tw-ease-in tw-duration-300 tw-cursor-pointer tw-text-3xl`}
       onClick={onClick}
     >
       {children}

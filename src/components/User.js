@@ -15,20 +15,20 @@ export default function User() {
   }, []);
 
   return (
-    <div className="flex gap-4 items-center">
+    <div className="tw-flex tw-gap-4 tw-items-center">
       <div>
         <img
           src={user?.profilePictureUrl}
           alt="avatar"
-          className="w-14 h-14 rounded-full"
+          className="tw-w-14 tw-h-14 tw-object-cover tw-rounded-full"
         />
       </div>
       <div>
-        <h1 className="text-xl font-bold">{user?.name}</h1>
-        <p className="text-sm text-gray-500">{user?.email}</p>
+        <h1 className="tw-text-xl tw-font-bold">{user?.name}</h1>
+        <p className="tw-text-sm tw-text-gray-500">{user?.email}</p>
       </div>
       <ButtonIcon onClick={() => router.push("/dashboard/profile")}>
-        <HiMiniUser className="w-6 h-6" />
+        <HiMiniUser className="tw-w-6 tw-h-6" />
       </ButtonIcon>
     </div>
   );

@@ -57,17 +57,19 @@ export default function CreateBanner() {
 
   return (
     <AdminLayout>
-      <div className="flex justify-center mt-10">
-        <div className="p-4 bg-slate-200 rounded w-full max-w-[900px] shadow-md">
+      <div className="tw-flex tw-justify-center tw-mt-10">
+        <div className="tw-p-4 tw-bg-slate-200 tw-rounded tw-w-full tw-max-w-[900px] tw-shadow-md">
           {loading ? (
             <div>Loading...</div>
           ) : (
             <>
-              <h5 className="text-2xl font-bold mb-4">Create Banner</h5>
+              <h5 className="tw-text-2xl tw-font-bold tw-mb-4">
+                Create Banner
+              </h5>
               <form onSubmit={handleSubmit}>
-                <div className="flex flex-col gap-4">
+                <div className="tw-flex tw-flex-col tw-gap-4">
                   <div>
-                    <label htmlFor="name" className="block mb-2">
+                    <label htmlFor="name" className="tw-block tw-mb-2">
                       Banner Name :
                     </label>
                     <Input
@@ -75,24 +77,24 @@ export default function CreateBanner() {
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      style="border p-2 w-full "
+                      style="tw-border tw-p-2 tw-w-full "
                     />
                   </div>
                   <div>
-                    <label htmlFor="image" className="block mb-2">
+                    <label htmlFor="image" className="tw-block tw-mb-2">
                       Banner Image :
                     </label>
                     <Input
                       type="file"
                       name="image"
-                      style="border p-2 w-full "
+                      style="tw-border tw-p-2 tw-w-full "
                       onChange={handleImageChange}
                     />
                   </div>
                   <Button
                     title="Create Banner"
                     type="submit"
-                    style="bg-blue-500 text-white p-2 rounded hover:bg-blue-700 self-end"
+                    style="tw-bg-blue-500 tw-text-white tw-p-2 tw-rounded hover:tw-bg-blue-700 tw-self-end"
                   />
                 </div>
               </form>

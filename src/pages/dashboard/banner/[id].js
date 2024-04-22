@@ -75,17 +75,19 @@ export default function EditBannerPage() {
         <div>Loading...</div>
       ) : (
         <>
-          <div className="mx-auto my-5 bg-white p-5 rounded-lg shadow max-w-[900px]">
-            <div className="flex gap-5 items-center">
+          <div className="tw-mx-auto tw-my-5 tw-bg-white tw-p-5 tw-rounded-lg tw-shadow tw-max-w-[900px]">
+            <div className="tw-flex tw-gap-5 tw-items-center">
               <img
                 src={banner.imageUrl}
                 alt={banner.name}
-                className="w-64 h-64 object-cover rounded-lg"
+                className="tw-w-64 tw-h-64 tw-object-cover tw-rounded-lg"
               />
               <div>
-                <p className="text-lg font-semibold">ID: {banner.id}</p>
-                <p className="text-lg font-semibold">Name: {banner.name}</p>
-                <p className="text-lg font-semibold">
+                <p className="tw-text-lg tw-font-semibold">ID: {banner.id}</p>
+                <p className="tw-text-lg tw-font-semibold">
+                  Name: {banner.name}
+                </p>
+                <p className="tw-text-lg tw-font-semibold">
                   Created At:{" "}
                   {new Date(banner.createdAt).toLocaleDateString("id-ID", {
                     weekday: "long",
@@ -94,7 +96,7 @@ export default function EditBannerPage() {
                     day: "numeric",
                   })}
                 </p>
-                <p className="text-lg font-semibold">
+                <p className="tw-text-lg tw-font-semibold">
                   Updated At:{" "}
                   {new Date(banner.updatedAt).toLocaleDateString("id-ID", {
                     weekday: "long",
@@ -107,10 +109,10 @@ export default function EditBannerPage() {
             </div>
           </div>
 
-          <div className="mx-auto my-5 bg-white p-5 rounded-lg shadow max-w-[900px]">
-            <h1 className="text-2xl font-bold mb-4">Edit Banner</h1>
+          <div className="tw-mx-auto tw-my-5 tw-bg-white tw-p-5 tw-rounded-lg tw-shadow tw-max-w-[900px]">
+            <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Edit Banner</h1>
             <form onSubmit={handleSubmit}>
-              <div className="flex flex-col gap-3">
+              <div className="tw-flex tw-flex-col tw-gap-3">
                 <Input
                   label="name"
                   name="name"
@@ -129,7 +131,7 @@ export default function EditBannerPage() {
                   title="Update Banner"
                   type="submit"
                   style={
-                    "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2 self-end"
+                    "tw-bg-blue-500 hover:tw-bg-blue-700 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded tw-ml-2 tw-self-end"
                   }
                 />
               </div>

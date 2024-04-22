@@ -21,10 +21,10 @@ export default function AdminLayout({ children, user }) {
   }
 
   return (
-    <div className="grid w-[96%] my-0 mx-auto gap-7 grid-cols-[12rem_auto] grid-rows-[1rem_auto]">
+    <div className="tw-grid tw-w-[96%] tw-my-0 tw-mx-auto tw-gap-7 tw-grid-cols-[12rem_auto] tw-grid-rows-[1rem_auto]">
       <Header />
       <Sidebar />
-      <main className="mt-7 overflow-auto h-[calc(100vh-6rem)]">
+      <main className="tw-mt-7 tw-overflow-auto tw-h-[calc(100vh-6rem)]">
         {children}
       </main>
     </div>

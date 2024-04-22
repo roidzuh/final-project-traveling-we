@@ -48,15 +48,15 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen flex items-center justify-center">
-      <div className="bg-gray-100 flex rounded-2xl shadow-lg  max-w-4xl p-3">
-        <div className="sm:w-1/2 ">
-          <h1 className="text-2xl font-bold ">TravelGo</h1>
+    <div className="tw-bg-gray-50 tw-min-h-screen tw-flex tw-items-center tw-justify-center">
+      <div className="tw-bg-gray-100 tw-flex tw-rounded-2xl tw-shadow-lg  tw-max-w-4xl tw-p-3">
+        <div className="sm:tw-w-1/2 ">
+          <h1 className="tw-text-2xl tw-font-bold ">TravelGo</h1>
           <form
-            className="flex flex-col gap-4 px-16 mt-20"
+            className="tw-flex tw-flex-col tw-gap-4 tw-px-16 tw-mt-20"
             onSubmit={handleSubmitLogin}
           >
-            <p className="text-black font-bold">Login</p>
+            <p className="tw-text-black tw-font-bold">Login</p>
             <Input
               type="email"
               name="email"
@@ -74,18 +74,18 @@ export default function LoginPage() {
             <Button
               title="Login"
               type="submit"
-              style="bg-gray-300 hover:bg-gray-400"
+              style="tw-bg-gray-300 hover:tw-bg-gray-400"
               isLoading={isLoading}
             />
-            <p className="text-gray-700 text-sm">
+            <p className="tw-text-gray-700 tw-text-sm">
               Do not have an account? <Link href="/signup">Create one</Link>
             </p>
           </form>
-          <p className="text-gray-400 text-xs mt-28">
+          <p className="tw-text-gray-400 tw-text-xs tw-mt-28">
             Copyright © 2024 TravelGo. All rights reserved.
           </p>
         </div>
-        <div className="sm:block hidden w-1/2 ">
+        <div className="sm:tw-block tw-hidden tw-w-1/2 ">
           <Swiper
             spaceBetween={30}
             centeredSlides={true}
@@ -98,14 +98,14 @@ export default function LoginPage() {
               dynamicBullets: true,
             }}
             modules={[Autoplay, Pagination]}
-            className="mySwiper w-[100%] h-[100%]"
+            className="mySwiper tw-w-[100%] tw-h-[100%]"
           >
             {loginImage.map((image) => (
               <SwiperSlide key={image.id}>
                 <img
                   src={image.image}
                   alt={image.title}
-                  className="flex items-center justify-center w-full h-full object-cover rounded-3xl"
+                  className="tw-flex tw-items-center tw-justify-center tw-w-full tw-h-full tw-object-cover tw-rounded-3xl"
                 />
               </SwiperSlide>
             ))}

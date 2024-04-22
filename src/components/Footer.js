@@ -1,8 +1,8 @@
 export default function Footer() {
   return (
-    <footer className="px-4 sm:px-6 lg:px-8 bg-black">
-      <div className="border-t border-gray-200 py-8 text-center text-sm text-gray-500">
-        Copyright © 2024 Travelo. All rights reserved.
+    <footer className="tw-px-4 sm:tw-px-6 lg:tw-px-8 tw-bg-black">
+      <div className="tw-border-t tw-border-gray-200 tw-py-8 tw-text-center tw-text-sm tw-text-gray-500">
+        Hak Cipta © 2024 Travelo. Semua hak dilindungi.
       </div>
     </footer>
   );

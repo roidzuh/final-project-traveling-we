@@ -70,21 +70,21 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen flex items-center justify-center">
-      <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-4xl p-3">
-        <div className="sm:w-1/2 ">
-          <h1 className="text-2xl font-bold ">TravelGo</h1>
+    <div className="tw-bg-gray-50 tw-min-h-screen tw-flex tw-items-center tw-justify-center">
+      <div className="tw-bg-gray-100 tw-flex tw-rounded-2xl tw-shadow-lg tw-max-w-4xl tw-p-3">
+        <div className="sm:tw-w-1/2 ">
+          <h1 className="tw-text-2xl tw-font-bold ">TravelGo</h1>
           <form
-            className="flex flex-col gap-3 px-6 mt-4"
+            className="tw-flex tw-flex-col tw-gap-3 tw-px-6 tw-mt-4"
             onSubmit={handleSubmit}
           >
-            <p className="text-black font-bold">Register</p>
-            <div className="flex gap-4">
+            <p className="tw-text-black tw-font-bold">Register</p>
+            <div className="tw-flex tw-gap-4">
               <Input
                 type="text"
                 name="firstName"
                 placeholder="First Name"
-                style="w-1/2"
+                style="tw-w-1/2"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
               />
@@ -92,7 +92,7 @@ export default function SignUpPage() {
                 type="text"
                 name="lastName"
                 placeholder="Last Name"
-                style="w-1/2"
+                style="tw-w-1/2"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
               />
@@ -128,17 +128,17 @@ export default function SignUpPage() {
             <Button
               title="Register"
               type="submit"
-              style={"bg-gray-300 hover:bg-gray-400"}
+              style={"tw-bg-gray-300 hover:tw-bg-gray-400"}
             />
-            <p className="text-gray-700 text-sm">
+            <p className="tw-text-gray-700 tw-text-sm">
               Do you have an account? <Link href="/login">Login</Link>
             </p>
           </form>
-          <p className="text-gray-400 text-xs mt-6">
+          <p className="tw-text-gray-400 tw-text-xs tw-mt-6">
             Copyright © 2024 TravelGo. All rights reserved.
           </p>
         </div>
-        <div className="sm:block hidden w-1/2 ">
+        <div className="sm:tw-block hidden tw-w-1/2 ">
           <Swiper
             spaceBetween={30}
             centeredSlides={true}
@@ -151,14 +151,14 @@ export default function SignUpPage() {
               dynamicBullets: true,
             }}
             modules={[Autoplay, Pagination]}
-            className="mySwiper w-[100%] h-[100%]"
+            className="mySwiper tw-w-[100%] tw-h-[100%]"
           >
             {loginImage.map((image) => (
               <SwiperSlide key={image.id}>
                 <img
                   src={image.image}
                   alt={image.title}
-                  className="flex items-center justify-center w-full h-full object-cover rounded-3xl"
+                  className="tw-flex tw-items-center tw-justify-center tw-w-full tw-h-full tw-object-cover tw-rounded-3xl"
                 />
               </SwiperSlide>
             ))}

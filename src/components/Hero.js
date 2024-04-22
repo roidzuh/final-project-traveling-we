@@ -3,22 +3,22 @@
 export default function Hero() {
   return (
     <div
-      className="relative min-h-[600px] h-screen text-center bg-cover bg-center"
+      className="tw-relative tw-min-h-[600px] tw-h-screen tw-text-center tw-bg-cover tw-bg-center"
       style={{
         backgroundImage:
           "linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7)), url('/hero-img.jpg')",
       }}
     >
-      <div className="z-10 px-6 sm:px-8 lg:px-12 relative top-36">
-        <h1 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+      <div className="tw-z-10 tw-px-6 sm:tw-px-8 lg:tw-px-12 tw-relative tw-top-36">
+        <h1 className="tw-text-white tw-text-4xl sm:tw-text-5xl md:tw-text-6xl lg:tw-text-7xl tw-font-bold tw-mb-6">
           Explore the World With Us
         </h1>
-        <p className="text-white text-base sm:text-lg md:text-xl lg:text-2xl mb-10">
+        <p className="tw-text-white tw-text-base sm:tw-text-lg md:tw-text-xl lg:tw-text-2xl tw-mb-10">
           Find your best experience in various destinations
         </p>
         {/* <Button
           title="Start Adventure"
-          style="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6"
+          style="tw-bg-blue-600 hover:tw-bg-blue-700 tw-text-white tw-font-bold tw-py-3 tw-px-6"
         /> */}
       </div>
     </div>

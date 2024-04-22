@@ -26,28 +26,31 @@ export default function Navbar() {
   }, [dispatch]);
 
   return (
-    <nav className="bg-white flex items-center justify-between px-12 py-2 z-50 mx-auto max-w[1440px] shadow-xl rounded-full fixed w-[95%] top-4 left-[2.5%]">
-      <Link href="/" className="text-black text-3xl font-bold no-underline">
+    <nav className="tw-bg-white tw-flex tw-items-center tw-justify-between tw-px-12 tw-py-2 tw-z-50 tw-mx-auto tw-max-w[1440px] tw-shadow-xl tw-rounded-full tw-fixed tw-w-[95%] tw-top-4 tw-left-[2.5%]">
+      <Link
+        href="/"
+        className="tw-text-black tw-text-3xl tw-font-bold tw-no-underline"
+      >
         TravelGo
       </Link>
-      <ul className="hidden m-0 md:flex gap-4">
+      <ul className="tw-hidden tw-m-0 md:tw-flex tw-gap-4">
         {navLinks.map((link) => (
           <Link
             href={link.href}
             key={link.title}
-            className="flex  items-center gap-2 no-underline relative text-black group"
+            className="tw-flex tw-items-center tw-gap-2 tw-no-underline tw-relative tw-text-black tw-group"
           >
             <link.icon />
             {link.title}
-            <span className="inline-block absolute h-[2px] w-0 bg-black top-6 transition-all duration-500 group-hover:w-full"></span>
+            <span className="tw-inline-block tw-absolute tw-h-[2px] tw-w-0 tw-bg-black tw-top-6 tw-transition-all tw-duration-500 group-hover:tw-w-full"></span>
           </Link>
         ))}
       </ul>
-      <div className="hidden md:flex space-x-4">
+      <div className="tw-hidden md:tw-flex tw-space-x-4">
         <ButtonLink title="Log In" href="/login" />
         <ButtonLink title="Sign In" href="/signup" />
       </div>
-      <div className="md:hidden" ref={menuRef}>
+      <div className="md:tw-hidden" ref={menuRef}>
         <ButtonIcon onClick={() => dispatch(setIsOpen(!isOpen))}>
           {isOpen ? <HiXCircle /> : <HiMiniBars3 />}
         </ButtonIcon>
@@ -55,22 +58,22 @@ export default function Navbar() {
         <ul
           className={
             isOpen
-              ? `bg-slate-100 p-0 shadow-md flex flex-col absolute top-14 right-0 rounded-lg  py-2 opacity-1 visible translate-y-0 transition-all ease-in duration-300`
-              : `bg-slate-100 p-0 shadow-md flex flex-col absolute top-14 right-0 rounded-lg py-2 opacity-0 invisible translate-y-0 transition-all ease-in duration-300`
+              ? `tw-bg-slate-100 tw-p-0 tw-shadow-md tw-flex tw-flex-col tw-absolute tw-top-14 tw-right-0 tw-rounded-lg  tw-py-2 tw-opacity-1 tw-visible tw-translate-y-0 tw-transition-all tw-ease-in tw-duration-300`
+              : `tw-bg-slate-100 tw-p-0 tw-shadow-md tw-flex tw-flex-col tw-absolute tw-top-14 tw-right-0 tw-rounded-lg tw-py-2 tw-opacity-0 tw-invisible tw-translate-y-0 tw-transition-all tw-ease-in tw-duration-300`
           }
         >
           {navLinks.map((link) => (
             <Link
               href={link.href}
               key={link.title}
-              className="flex gap-2 no-underline text-black hover:bg-slate-300 p-4 transition-all ease-in duration-300"
+              className="tw-flex tw-gap-2 tw-no-underline tw-text-black hover:tw-bg-slate-300 tw-p-4 tw-transition-all tw-ease-in tw-duration-300"
             >
               <link.icon />
               {link.title}
             </Link>
           ))}
 
-          <div className="flex gap-4 m-2">
+          <div className="tw-flex tw-gap-4 tw-m-2">
             <ButtonLink title="Log In" href="/login" />
             <ButtonLink title="Sign In" href="/signup" />
           </div>

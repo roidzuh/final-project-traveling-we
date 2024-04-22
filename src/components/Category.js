@@ -10,13 +10,13 @@ export default function Category({ categories }) {
   const dispatch = useDispatch();
 
   return (
-    <div className="absolute w-full ">
-      <div className="relative bottom-64 text-center">
-        <div className="pb-4 text-slate-200">
+    <div className="tw-absolute tw-w-full ">
+      <div className="tw-relative tw-bottom-64 tw-text-center">
+        <div className="tw-pb-4 tw-text-slate-200">
           <h2>Popular Destinations</h2>
           <p>&quot;Find your best experience&quot;</p>
         </div>
-        <div className="px-4 md:px-16 lg:px-16 ">
+        <div className="tw-px-4 md:tw-px-16 lg:tw-px-16 ">
           <Swiper
             breakpoints={{
               640: {
@@ -42,15 +42,17 @@ export default function Category({ categories }) {
             onClick={() => dispatch(setIsOpen())}
           >
             {categories?.map((category) => (
-              <SwiperSlide key={category.id} className="group">
-                <div className="relative">
+              <SwiperSlide key={category.id} className="tw-group">
+                <div className="tw-relative">
                   <img
                     src={category.imageUrl}
                     alt={category.name}
-                    className="w-full h-96 object-cover rounded-xl group-hover:blur-sm transition duration-300 ease-in-out"
+                    className="tw-w-full tw-h-96 tw-object-cover tw-rounded-xl group-hover:tw-blur-sm tw-transition tw-duration-300 tw-ease-in-out"
                   />
-                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out rounded-xl">
-                    <span className="text-white text-lg">{category.name}</span>
+                  <div className="tw-absolute tw-inset-0 tw-bg-black tw-bg-opacity-0 group-hover:tw-bg-opacity-50 tw-flex tw-items-center tw-justify-center tw-opacity-0 group-hover:tw-opacity-100 tw-transition tw-duration-300 tw-ease-in-out tw-rounded-xl">
+                    <span className="tw-text-white tw-text-lg">
+                      {category.name}
+                    </span>
                   </div>
                 </div>
               </SwiperSlide>

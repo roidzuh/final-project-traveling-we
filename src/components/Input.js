@@ -13,7 +13,7 @@ export default function Input({
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      className={`${style} p-2 rounded-xl border`}
+      className={`${style} tw-p-2 tw-rounded-xl tw-border`}
     />
   );
 }

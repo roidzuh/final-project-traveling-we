@@ -43,7 +43,7 @@ export default function ActivityPage() {
   if (isLoading) {
     return (
       <MainLayout>
-        <div className="container mx-auto my-12 p-5 min-h-screen flex justify-center items-center">
+        <div className="tw-container tw-mx-auto tw-my-12 tw-p-5 tw-min-h-screen tw-flex tw-justify-center tw-items-center">
           <div>Loading...</div>
         </div>
       </MainLayout>
@@ -52,11 +52,11 @@ export default function ActivityPage() {
 
   return (
     <MainLayout>
-      <div className="container mx-auto my-12 p-5 min-h-screen">
-        <div className="mb-5">
+      <div className="tw-container tw-mx-auto tw-my-24 tw-p-5 tw-min-h-screen">
+        <div className="tw-mb-5">
           <select
             onChange={handleCategoryChange}
-            className="form-select block w-full mt-1"
+            className="form-select tw-block tw-w-full tw-mt-1"
           >
             <option value="">Select Category</option>
             {categories.map((category) => (
@@ -66,20 +66,22 @@ export default function ActivityPage() {
             ))}
           </select>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-4 tw-gap-4">
           {activities.map((activity) => (
             <Link
               key={activity.id}
               href={`/activity/${activity.id}`}
-              className="bg-white rounded-lg shadow overflow-hidden no-underline text-gray-600"
+              className="tw-bg-white tw-rounded-lg tw-shadow tw-overflow-hidden tw-no-underline tw-text-gray-600"
             >
               <img
                 src={activity.imageUrls[1]}
                 alt={activity.title}
-                className="w-full h-48 object-cover"
+                className="tw-w-full tw-h-48 tw-object-cover"
               />
-              <div className="p-4">
-                <h3 className="text-lg font-semibold">{activity.title}</h3>
+              <div className="tw-p-4">
+                <h3 className="tw-text-lg tw-font-semibold">
+                  {activity.title}
+                </h3>
                 <p>{activity.description}</p>
               </div>
             </Link>

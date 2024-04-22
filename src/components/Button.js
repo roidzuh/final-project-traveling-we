@@ -8,7 +8,7 @@ export default function Button({
   return (
     <button
       type={type}
-      className={` px-4 py-2 rounded-md border-none transition-all ease-in duration-300 cursor-pointer ${style}`}
+      className={`tw-px-4 tw-py-2 tw-rounded-md tw-border-none tw-transition-all tw-ease-in tw-duration-300 tw-cursor-pointer ${style}`}
       onClick={onClick}
       disabled={isLoading}
     >

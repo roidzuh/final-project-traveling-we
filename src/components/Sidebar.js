@@ -23,30 +23,30 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="h-full">
-      <nav className="bg-slate-200 flex flex-col shadow-lg rounded-lg min-h-[365px] h-[87vh] relative top-6 transition-all ease-in hover:shadow-none">
+    <aside className="tw-h-full">
+      <nav className="tw-bg-slate-200 tw-flex tw-flex-col tw-shadow-lg tw-rounded-lg tw-min-h-[365px] tw-h-[87vh] tw-relative tw-top-6 tw-transition-all tw-ease-in hover:tw-shadow-none">
         {sidebarLink.map((link) => (
           <Link
             href={link.href}
             key={link.title}
-            className="no-underline text-gray-600 flex items-center h-14 gap-4 relative ml-8 transition-all ease-in hover:ml-12"
+            className="tw-no-underline tw-text-gray-600 tw-flex tw-items-center tw-h-14 tw-gap-4 tw-relative tw-ml-8 tw-transition-all tw-ease-in hover:tw-ml-12"
           >
-            <link.icon className="text-xl transition-all ease-in" />
+            <link.icon className="tw-text-xl tw-transition-all tw-ease-in" />
             {link.title}
           </Link>
         ))}
         <ButtonIcon
           style={
-            "text-gray-600 items-center gap-4 ml-8 hover:ml-12 absolute bottom-10 w-full"
+            "tw-text-gray-600 tw-items-center tw-gap-4 tw-ml-8 hover:tw-ml-12 tw-absolute tw-bottom-10 tw-w-full"
           }
           onClick={handleSubmitLogout}
         >
           {loading ? (
-            <span className="text-lg">Logging out...</span>
+            <span className="tw-text-lg">Logging out...</span>
           ) : (
             <>
-              <HiArrowLeftOnRectangle className="text-xl transition-all ease-in" />
-              <span className="text-lg">Logout</span>
+              <HiArrowLeftOnRectangle className="tw-text-xl tw-transition-all tw-ease-in" />
+              <span className="tw-text-lg">Logout</span>
             </>
           )}
         </ButtonIcon>
