@@ -1,4 +1,3 @@
-import React from "react";
 import { Pagination as BootstrapPagination } from "react-bootstrap";
 
 export default function Pagination({
@@ -16,14 +15,17 @@ export default function Pagination({
         <BootstrapPagination.Prev
           onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-        />
-        <BootstrapPagination.Item>{currentPage}</BootstrapPagination.Item>
+        >
+          Prev
+        </BootstrapPagination.Prev>
         <BootstrapPagination.Next
           onClick={() =>
             currentPage < pageCount && onPageChange(currentPage + 1)
           }
           disabled={currentPage === pageCount}
-        />
+        >
+          Next
+        </BootstrapPagination.Next>
       </BootstrapPagination>
     </div>
   );
