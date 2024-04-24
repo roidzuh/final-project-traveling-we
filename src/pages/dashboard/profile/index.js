@@ -4,6 +4,7 @@ import AdminLayout from "@/layout/AdminLayout";
 import { fetchUser, uploadImage, updateProfile } from "@/utils/api";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import Spinners from "@/components/Spinners";
 
 export default function ProfilePageDashboard() {
   const [profile, setProfile] = useState({
@@ -13,8 +14,10 @@ export default function ProfilePageDashboard() {
     profilePictureUrl: "",
   });
   const [selectedFile, setSelectedFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const token = localStorage.getItem("token");
     const getProfile = async () => {
       try {
@@ -30,6 +33,7 @@ export default function ProfilePageDashboard() {
       } catch (error) {
         toast.error("Failed to fetch profile.");
       }
+      setIsLoading(false);
     };
     getProfile();
   }, []);
@@ -51,6 +55,7 @@ export default function ProfilePageDashboard() {
       toast.error("Please select a file first.");
       return;
     }
+    setIsLoading(true);
     const token = localStorage.getItem("token");
     try {
       const response = await uploadImage(selectedFile, token);
@@ -66,10 +71,12 @@ export default function ProfilePageDashboard() {
     } catch (error) {
       toast.error("Failed to upload image.");
     }
+    setIsLoading(false);
   };
 
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const token = localStorage.getItem("token");
     try {
       const response = await updateProfile(profile, token);
@@ -78,73 +85,83 @@ export default function ProfilePageDashboard() {
       } else {
         localStorage.setItem("user", JSON.stringify(profile));
         toast.success("Profile updated successfully.");
-        window.location.reload(); // Menambahkan baris ini untuk reload halaman setelah berhasil update
+        window.location.reload();
       }
     } catch (error) {
       toast.error("Failed to update profile.");
     }
+    setIsLoading(false);
   };
 
   return (
     <AdminLayout>
-      <div className="w-full bg-slate-100 h-[calc(100vh-10rem)] min-h-[600px] rounded-xl p-4 md:p-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center justify-center">
-          <div className="text-center">
-            <img
-              src={profile.profilePictureUrl}
-              alt={profile.name}
-              className="w-full max-w-xs h-auto rounded-xl mx-auto"
-            />
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4 mt-4">
-              <Input type="file" onChange={handleFileChange} />
+      {isLoading ? (
+        <Spinners />
+      ) : (
+        <div className="tw-w-full tw-bg-slate-100 tw-h-[calc(100vh-10rem)] tw-min-h-[600px] tw-rounded-xl tw-p-4 tw-md:tw-p-8">
+          <div className="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center tw-justify-center">
+            <div className="tw-text-center">
+              <img
+                src={profile.profilePictureUrl}
+                alt={profile.name}
+                className="tw-w-full tw-max-w-xs tw-h-auto tw-rounded-xl tw-mx-auto"
+              />
+              <div className="tw-flex tw-flex-col md:tw-flex-row tw-items-center tw-justify-center tw-gap-4 tw-mt-4">
+                <Input type="file" onChange={handleFileChange} />
+                <Button
+                  title="Update image"
+                  style={"tw-bg-blue-500 tw-text-white hover:tw-bg-blue-700"}
+                  onClick={handleImageUpload}
+                />
+              </div>
+            </div>
+            <form
+              className="tw-flex tw-flex-col tw-gap-6"
+              onSubmit={handleProfileUpdate}
+            >
+              <div className="tw-flex tw-flex-col tw-gap-2">
+                <label className="tw-font-semibold">Name</label>
+                <Input
+                  placeholder="Name"
+                  name="name"
+                  value={profile.name}
+                  onChange={handleInputChange}
+                  style="tw-border-gray-300 focus:tw-border-blue-500"
+                />
+              </div>
+              <div className="tw-flex tw-flex-col tw-gap-2">
+                <label className="tw-font-semibold tw-text-gray-700">
+                  Email
+                </label>
+                <Input
+                  placeholder="Email"
+                  name="email"
+                  value={profile.email}
+                  onChange={handleInputChange}
+                  style="tw-border-gray-300 focus:tw-border-blue-500"
+                />
+              </div>
+              <div className="tw-flex tw-flex-col tw-gap-2">
+                <label className="tw-font-semibold tw-text-gray-700">
+                  Phone Number
+                </label>
+                <Input
+                  placeholder="Phone Number"
+                  name="phoneNumber"
+                  value={profile.phoneNumber}
+                  onChange={handleInputChange}
+                  style="tw-border-gray-300 focus:tw-border-blue-500"
+                />
+              </div>
               <Button
-                title="Update image"
-                style={"bg-blue-500 text-white hover:bg-blue-700"}
-                onClick={handleImageUpload}
+                title="Update Profile"
+                style="tw-bg-blue-600 tw-text-white hover:tw-bg-blue-800"
+                type="submit"
               />
-            </div>
+            </form>
           </div>
-          <form className="flex flex-col gap-6" onSubmit={handleProfileUpdate}>
-            <div className="flex flex-col gap-2">
-              <label className="font-semibold">Name</label>
-              <Input
-                placeholder="Name"
-                name="name"
-                value={profile.name}
-                onChange={handleInputChange}
-                style="border-gray-300 focus:border-blue-500"
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="font-semibold text-gray-700">Email</label>
-              <Input
-                placeholder="Email"
-                name="email"
-                value={profile.email}
-                onChange={handleInputChange}
-                style="border-gray-300 focus:border-blue-500"
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="font-semibold text-gray-700">
-                Phone Number
-              </label>
-              <Input
-                placeholder="Phone Number"
-                name="phoneNumber"
-                value={profile.phoneNumber}
-                onChange={handleInputChange}
-                style="border-gray-300 focus:border-blue-500"
-              />
-            </div>
-            <Button
-              title="Update Profile"
-              style="bg-blue-600 text-white hover:bg-blue-800"
-              type="submit"
-            />
-          </form>
         </div>
-      </div>
+      )}
     </AdminLayout>
   );
 }
