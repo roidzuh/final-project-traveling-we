@@ -40,6 +40,8 @@ export const fetchPromo = () => apiRequest("api/v1/promos");
 export const fetchPromoById = (promoId) =>
   apiRequest(`api/v1/promo/${promoId}`);
 export const fetchCategory = () => apiRequest("api/v1/categories");
+export const fetchCategoryById = (categoryId) =>
+  apiRequest(`api/v1/category/${categoryId}`);
 export const fetchActivity = () => apiRequest("api/v1/activities");
 export const fetchActivityById = (activityId) =>
   apiRequest(`api/v1/activity/${activityId}`);
@@ -100,14 +102,32 @@ export const deletePromo = (promoId, token) =>
 export const deleteCategory = (categoryId, token) =>
   apiRequest(`api/v1/delete-category/${categoryId}`, "delete", null, token);
 
+export const updateCategory = (categoryId, data, token) =>
+  apiRequest(`api/v1/update-category/${categoryId}`, "post", data, token);
+
 export const updateBanner = (bannerId, data, token) =>
   apiRequest(`api/v1/update-banner/${bannerId}`, "post", data, token);
 
 export const updatePromo = (promoId, data, token) =>
   apiRequest(`api/v1/update-promo/${promoId}`, "post", data, token);
 
+export const createCategory = (data, token) =>
+  apiRequest("api/v1/create-category", "post", data, token);
+
 export const createBanner = (data, token) =>
   apiRequest("api/v1/create-banner", "post", data, token);
 
+export const createPromo = (data, token) =>
+  apiRequest("api/v1/create-promo", "post", data, token);
+
 export const registerUser = (data) =>
   apiRequest("api/v1/register", "post", data);
+
+export const createActivity = (data, token) =>
+  apiRequest("api/v1/create-activity", "post", data, token);
+
+export const updateActivity = (activityId, data, token) =>
+  apiRequest(`api/v1/update-activity/${activityId}`, "post", data, token);
+
+export const deleteActivity = (activityId, token) =>
+  apiRequest(`api/v1/delete-activity/${activityId}`, "delete", null, token);

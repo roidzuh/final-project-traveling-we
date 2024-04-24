@@ -7,7 +7,8 @@ import { BsGrid3X3Gap, BsCalendar } from "react-icons/bs";
 
 export const navLinks = [
   { title: "Home", href: "/", icon: HiHome },
-  { title: "Destinations", href: "/", icon: HiMap },
+  { title: "Activity", href: "/activity", icon: HiMap },
+  { title: "Promo", href: "/promo", icon: MdLocalOffer },
 ];
 
 export const loginImage = [
