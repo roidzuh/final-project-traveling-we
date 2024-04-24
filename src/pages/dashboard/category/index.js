@@ -1,115 +1,240 @@
 import AdminLayout from "@/layout/AdminLayout";
+import Modal from "@/components/Modal";
 import { useEffect, useState } from "react";
-import { fetchCategory, deleteCategory } from "@/utils/api";
+import {
+  fetchCategory,
+  fetchCategoryById,
+  deleteCategory,
+  updateCategory,
+  createCategory,
+  uploadImage,
+} from "@/utils/api";
 import { toast } from "react-toastify";
 import Pagination from "@/components/Pagination";
-import Link from "next/link";
-import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi2";
-import ButtonIcon from "@/components/ButtonIcon";
+import Button from "@/components/Button";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  toggleEditModal,
+  toggleCreateModal,
+} from "@/features/slices/modalSlice";
+import CategoryForm from "@/components/CategoryForm";
+import Spinners from "@/components/Spinners";
+import DashboardCard from "@/components/DashboardCard";
 
 export default function CategoryPageDashboard() {
+  const dispatch = useDispatch();
+  const { isEditModalOpen, isCreateModalOpen } = useSelector(
+    (state) => state.modal
+  );
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [imageFile, setImageFile] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [categoriesPerPage] = useState(5);
+  const [categoriesPerPage] = useState(6);
+  const currentCategories = categories?.slice(
+    currentPage * categoriesPerPage - categoriesPerPage,
+    currentPage * categoriesPerPage
+  );
 
   useEffect(() => {
-    const getCategories = async () => {
-      const dataCategory = await fetchCategory();
-      setCategories(dataCategory?.data);
-      setLoading(false);
-    };
-    getCategories();
+    fetchAndSetCategories();
   }, []);
 
-  const handleDelete = async (categoryId) => {
-    const token = localStorage.getItem("token");
-    const response = await deleteCategory(categoryId, token);
-    if (!response.error) {
-      setCategories(
-        categories.filter((category) => category.id !== categoryId)
-      );
-      toast.success(response.message);
-    } else {
-      toast.error(response.message);
+  const fetchAndSetCategories = async () => {
+    setLoading(true);
+    try {
+      const { data } = await fetchCategory();
+      setCategories(data);
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const indexOfLastCategory = currentPage * categoriesPerPage;
-  const indexOfFirstCategory = indexOfLastCategory - categoriesPerPage;
-  const currentCategories = categories.slice(
-    indexOfFirstCategory,
-    indexOfLastCategory
-  );
+  const handleInputChange = ({ target: { name, value, files } }) => {
+    if (name === "imageFile") {
+      setImageFile(files[0]);
+    } else {
+      setSelectedCategory((prevState) => ({ ...prevState, [name]: value }));
+    }
+  };
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const handleToggleEdit = async (categoryId) => {
+    setImageFile(null);
+    if (categoryId) {
+      try {
+        const { data } = await fetchCategoryById(categoryId);
+        setSelectedCategory(data);
+        dispatch(toggleEditModal());
+      } catch (error) {
+        toast.error(error.message);
+      }
+    } else {
+      setSelectedCategory({ name: "", imageUrl: "" });
+      dispatch(toggleCreateModal());
+    }
+  };
+
+  const handleCategoryOperation = async (operation) => {
+    setIsSubmitting(true);
+    const token = localStorage.getItem("token");
+    let imageUrl = selectedCategory.imageUrl;
+    if (imageFile) {
+      try {
+        const { url, error, message } = await uploadImage(imageFile, token);
+        if (error) {
+          toast.error(message);
+          setIsSubmitting(false);
+          return;
+        }
+        imageUrl = url;
+      } catch (error) {
+        toast.error(error.message);
+        setIsSubmitting(false);
+        return;
+      }
+    }
+    const categoryData = { name: selectedCategory.name, imageUrl };
+    if (!categoryData.name || !categoryData.imageUrl) {
+      toast.error("Category name and image must be provided.");
+      setIsSubmitting(false);
+      return;
+    }
+    try {
+      let response;
+      if (operation === updateCategory) {
+        response = await operation(selectedCategory.id, categoryData, token);
+      } else {
+        response = await operation(categoryData, token);
+      }
+      if (!response.error) {
+        setCategories((prevCategories) => {
+          if (operation === updateCategory) {
+            return prevCategories.map((category) =>
+              category.id === selectedCategory.id
+                ? { ...category, ...categoryData }
+                : category
+            );
+          } else {
+            return [...prevCategories, { ...categoryData }];
+          }
+        });
+        toast.success(response.message);
+        resetCategoryState();
+        fetchAndSetCategories();
+      } else {
+        toast.error(response.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setIsSubmitting(false);
+      console.log(imageUrl, imageFile, selectedCategory.imageUrl);
+    }
+  };
+
+  const handleEdit = () =>
+    handleCategoryOperation(updateCategory, selectedCategory.id);
+  const handleCreate = () => handleCategoryOperation(createCategory);
+  const handleDelete = async (categoryId) => {
+    setIsSubmitting(true);
+    const token = localStorage.getItem("token");
+    try {
+      const response = await deleteCategory(categoryId, token);
+      if (!response.error) {
+        setCategories(
+          categories.filter((category) => category.id !== categoryId)
+        );
+        toast.success(response.message);
+      } else {
+        toast.error(response.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const resetCategoryState = () => {
+    if (isEditModalOpen) {
+      dispatch(toggleEditModal());
+    } else {
+      dispatch(toggleCreateModal());
+    }
+    setImageFile(null);
+    setSelectedCategory(null);
+  };
 
   return (
     <AdminLayout>
       {loading ? (
-        <div>
-          <p>Loading...</p>
-        </div>
+        <Spinners />
       ) : (
-        <div className="container mx-auto ">
-          <div className="overflow-x-auto">
-            <div className="flex justify-between mb-4">
-              <Link
-                href="/dashboard/category/create"
-                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded no-underline"
-              >
-                Create Category
-              </Link>
+        <div className="tw-container tw-mx-auto">
+          <div className="tw-overflow-x-auto">
+            <div className="tw-flex tw-justify-between tw-mb-4 tw-p-4">
+              <h2 className="tw-text-gray-500 tw-font-bold">Category List</h2>
+              <Button
+                title="Create Category"
+                style="tw-bg-green-500 hover:tw-bg-green-700 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded"
+                onClick={() => handleToggleEdit(null)}
+                disabled={isSubmitting}
+              />
             </div>
-            <table className="min-w-full border-collapse border border-gray-800">
-              <thead>
-                <tr className="bg-gray-800 text-white">
-                  <th className="px-4 py-2">ID</th>
-                  <th className="px-4 py-2">Name</th>
-                  <th className="px-4 py-2">Image</th>
-                  <th className="px-4 py-2">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentCategories.map((category) => (
-                  <tr className="bg-gray-200" key={category.id}>
-                    <td className="border px-4 py-2">{category.id}</td>
-                    <td className="border px-4 py-2">{category.name}</td>
-                    <td className="border px-4 py-2">
-                      <img
-                        src={category.imageUrl}
-                        alt={category.name}
-                        className="w-20 h-20"
-                      />
-                    </td>
-                    <td className="border px-4 py-2">
-                      <div className="flex items-center justify-center gap-4">
-                        <ButtonIcon
-                          style="text-black font-bold"
-                          onClick={() => handleDelete(category.id)}
-                        >
-                          <HiOutlineTrash />
-                        </ButtonIcon>
-                        <Link
-                          href={`/dashboard/category/${category.id}`}
-                          className="text-3xl text-black font-bold no-underline"
-                        >
-                          <HiOutlinePencil />
-                        </Link>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-4">
+              {currentCategories?.map((category) => (
+                <DashboardCard
+                  key={category.id}
+                  image={category.imageUrl}
+                  name={category.name}
+                  id={category.id}
+                  createdAt={category.createdAt}
+                  updatedAt={category.updatedAt}
+                  onEdit={() => handleToggleEdit(category.id)}
+                  onDelete={() => handleDelete(category.id)}
+                />
+              ))}
+            </div>
             <Pagination
               itemsCount={categories.length}
               pageSize={categoriesPerPage}
               currentPage={currentPage}
-              onPageChange={paginate}
+              onPageChange={setCurrentPage}
             />
           </div>
         </div>
+      )}
+      {isEditModalOpen && (
+        <Modal
+          title={"Edit Category"}
+          buttonText={"Edit Category"}
+          onClose={resetCategoryState}
+          onSubmit={handleEdit}
+          isSubmitting={isSubmitting}
+        >
+          <CategoryForm
+            selectedCategory={selectedCategory}
+            onInputChange={handleInputChange}
+          />
+        </Modal>
+      )}
+      {isCreateModalOpen && (
+        <Modal
+          title={"Create New Category"}
+          buttonText={"Create Category"}
+          onClose={resetCategoryState}
+          onSubmit={handleCreate}
+          isSubmitting={isSubmitting}
+        >
+          <CategoryForm
+            selectedCategory={selectedCategory}
+            onInputChange={handleInputChange}
+          />
+        </Modal>
       )}
     </AdminLayout>
   );
