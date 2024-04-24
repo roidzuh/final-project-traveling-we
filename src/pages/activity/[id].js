@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { fetchActivityById } from "../../utils/api";
 import MainLayout from "@/layout/MainLayout";
+import Spinners from "@/components/Spinners";
 
 export default function ActivityDetail() {
   const [activity, setActivity] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [showFullDescription, setShowFullDescription] = useState(false);
   const router = useRouter();
   const { id } = router.query;
 
@@ -19,13 +21,15 @@ export default function ActivityDetail() {
     }
   }, [id]);
 
+  const toggleDescription = () => {
+    setShowFullDescription(!showFullDescription);
+  };
+
   return (
     <MainLayout>
-      <div className="tw-container tw-mx-auto tw-my-24 tw-p-5 tw-min-h-[2000px] lg:tw-min-h-[1200px] ">
+      <div className="tw-container tw-mx-auto tw-my-24 tw-p-5 tw-min-h-[1700px] lg:tw-min-h-[1000px] ">
         {isLoading ? (
-          <div className="tw-container tw-mx-auto tw-my-16 tw-p-5 tw-flex tw-justify-center tw-items-center">
-            <div>Loading...</div>
-          </div>
+          <Spinners />
         ) : (
           <div className="md:tw-flex tw-no-wrap md:tw-mx-2">
             <div className="tw-w-full md:tw-w-3/12 md:tw-mx-2">
@@ -33,7 +37,7 @@ export default function ActivityDetail() {
                 <div className="tw-image tw-overflow-hidden">
                   <img
                     className="tw-h-auto tw-w-full tw-mx-auto tw-rounded-md"
-                    src={activity.imageUrls[1]}
+                    src={activity.imageUrls[0]}
                     alt={activity.title}
                   />
                 </div>
@@ -56,7 +60,7 @@ export default function ActivityDetail() {
               </div>
             </div>
             <div className="tw-w-full md:tw-w-9/12 tw-mx-2">
-              <div className="tw-bg-white tw-p-3 tw-shadow-sm tw-rounded-sm">
+              <div className="tw-bg-gray-100 tw-p-3 tw-shadow-sm tw-rounded-sm">
                 <div className="tw-flex tw-items-center tw-space-x-2 tw-font-semibold tw-text-gray-900">
                   <span className="tw-tracking-wide">About</span>
                 </div>
@@ -73,7 +77,31 @@ export default function ActivityDetail() {
                         Description
                       </div>
                       <div className="tw-px-4 tw-py-2">
-                        {activity.description}
+                        {activity.description.length > 100 ? (
+                          showFullDescription ? (
+                            <span>
+                              {activity.description}{" "}
+                              <span
+                                onClick={toggleDescription}
+                                className="tw-text-blue-500 tw-cursor-pointer tw-underline"
+                              >
+                                Show less
+                              </span>
+                            </span>
+                          ) : (
+                            <span>
+                              {activity.description.substring(0, 100)}...{" "}
+                              <span
+                                onClick={toggleDescription}
+                                className="tw-text-blue-500 tw-cursor-pointer tw-underline"
+                              >
+                                Show more
+                              </span>
+                            </span>
+                          )
+                        ) : (
+                          <span>{activity.description}</span>
+                        )}
                       </div>
                     </div>
                     <div className="tw-grid tw-grid-cols-2">
@@ -100,14 +128,16 @@ export default function ActivityDetail() {
                       <div className="tw-px-4 tw-py-2 tw-font-semibold">
                         Price
                       </div>
-                      <div className="tw-px-4 tw-py-2">{activity.price}</div>
+                      <div className="tw-px-4 tw-py-2">
+                        IDR {activity.price}
+                      </div>
                     </div>
                     <div className="tw-grid tw-grid-cols-2">
                       <div className="tw-px-4 tw-py-2 tw-font-semibold">
                         Price Discount
                       </div>
                       <div className="tw-px-4 tw-py-2">
-                        {activity.price_discount}
+                        IDR {activity.price_discount}
                       </div>
                     </div>
                     <div className="tw-grid tw-grid-cols-2">
@@ -136,6 +166,20 @@ export default function ActivityDetail() {
             </div>
           </div>
         )}
+        <div className="tw-w-full tw-mx-auto tw-my-8">
+          <div className="tw-bg-gray-100 tw-p-3 tw-shadow-sm tw-rounded-sm">
+            <div className="tw-px-4 tw-py-2 tw-font-semibold">Location Map</div>
+            <div
+              className="tw-px-4 tw-py-2 tw-w-full"
+              dangerouslySetInnerHTML={{
+                __html: activity?.location_maps.replace(
+                  /width="[^"]*"/,
+                  'width="100%"'
+                ),
+              }}
+            ></div>
+          </div>
+        </div>
       </div>
     </MainLayout>
   );
