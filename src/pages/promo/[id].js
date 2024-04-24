@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { fetchPromoById } from "../../utils/api";
 import MainLayout from "@/layout/MainLayout";
+import Spinners from "@/components/Spinners";
 
 export default function PromoDetail() {
   const [promo, setPromo] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [showFullDescription, setShowFullDescription] = useState(false);
   const router = useRouter();
   const { id } = router.query;
 
@@ -19,13 +21,15 @@ export default function PromoDetail() {
     }
   }, [id]);
 
+  const toggleDescription = () => {
+    setShowFullDescription(!showFullDescription);
+  };
+
   return (
     <MainLayout>
-      <div className="tw-container tw-mx-auto tw-my-16 tw-p-5 tw-min-h-screen ">
+      <div className="tw-container tw-mx-auto tw-my-20 tw-p-5 tw-min-h-screen ">
         {isLoading ? (
-          <div className="tw-container tw-mx-auto tw-my-16 tw-p-5 tw-flex tw-justify-center tw-items-center">
-            <div>Loading...</div>
-          </div>
+          <Spinners />
         ) : (
           <div className="md:tw-flex tw-no-wrap md:tw-mx-2">
             <div className="tw-w-full md:tw-w-3/12 md:tw-mx-2">
@@ -51,7 +55,7 @@ export default function PromoDetail() {
               </div>
             </div>
             <div className="tw-w-full md:tw-w-9/12 tw-mx-2">
-              <div className="tw-bg-white tw-p-3 tw-shadow-sm tw-rounded-sm">
+              <div className="tw-bg-gray-100 tw-p-3 tw-shadow-sm tw-rounded-sm">
                 <div className="tw-flex tw-items-center tw-space-x-2 tw-font-semibold tw-text-gray-900">
                   <span className="tw-tracking-wide">About</span>
                 </div>
@@ -67,7 +71,33 @@ export default function PromoDetail() {
                       <div className="tw-px-4 tw-py-2 tw-font-semibold">
                         Description
                       </div>
-                      <div className="tw-px-4 tw-py-2">{promo.description}</div>
+                      <div className="tw-px-4 tw-py-2">
+                        {promo.description.length > 100 ? (
+                          showFullDescription ? (
+                            <span>
+                              {promo.description}{" "}
+                              <span
+                                onClick={toggleDescription}
+                                className="tw-text-blue-500 tw-cursor-pointer tw-underline"
+                              >
+                                Show less
+                              </span>
+                            </span>
+                          ) : (
+                            <span>
+                              {promo.description.substring(0, 100)}...{" "}
+                              <span
+                                onClick={toggleDescription}
+                                className="tw-text-blue-500 tw-cursor-pointer tw-underline"
+                              >
+                                Show more
+                              </span>
+                            </span>
+                          )
+                        ) : (
+                          <span>{promo.description}</span>
+                        )}
+                      </div>
                     </div>
                     <div className="tw-grid tw-grid-cols-2">
                       <div className="tw-px-4 tw-py-2 tw-font-semibold">
@@ -88,7 +118,7 @@ export default function PromoDetail() {
                         Promo Discount Price
                       </div>
                       <div className="tw-px-4 tw-py-2">
-                        {promo.promo_discount_price}
+                        IDR {promo.promo_discount_price}
                       </div>
                     </div>
                     <div className="tw-grid tw-grid-cols-2">
@@ -96,7 +126,7 @@ export default function PromoDetail() {
                         Minimum Claim Price
                       </div>
                       <div className="tw-px-4 tw-py-2">
-                        {promo.minimum_claim_price}
+                        IDR {promo.minimum_claim_price}
                       </div>
                     </div>
                   </div>
