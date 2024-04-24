@@ -48,7 +48,7 @@ export default function Category({ categories }) {
                     className="tw-w-full tw-h-96 tw-object-cover tw-rounded-xl group-hover:tw-blur-sm tw-transition tw-duration-300 tw-ease-in-out"
                   />
                   <div className="tw-absolute tw-inset-0 tw-bg-black tw-bg-opacity-0 group-hover:tw-bg-opacity-50 tw-flex tw-items-center tw-justify-center tw-opacity-0 group-hover:tw-opacity-100 tw-transition tw-duration-300 tw-ease-in-out tw-rounded-xl">
-                    <span className="tw-text-white tw-text-lg">
+                    <span className="tw-text-white tw-text-xl tw-font-bold">
                       {category.name}
                     </span>
                   </div>
