@@ -42,7 +42,10 @@ export default function Sidebar() {
           onClick={handleSubmitLogout}
         >
           {loading ? (
-            <span className="tw-text-lg">Logging out...</span>
+            <>
+              <HiArrowLeftOnRectangle className="tw-text-xl tw-transition-all tw-ease-in" />
+              <span className="tw-text-lg">Logout...</span>
+            </>
           ) : (
             <>
               <HiArrowLeftOnRectangle className="tw-text-xl tw-transition-all tw-ease-in" />
