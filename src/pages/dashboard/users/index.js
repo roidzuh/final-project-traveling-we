@@ -5,12 +5,13 @@ import Button from "@/components/Button";
 import { toast } from "react-toastify";
 import AdminLayout from "@/layout/AdminLayout";
 import Pagination from "@/components/Pagination";
+import Spinners from "@/components/Spinners";
 
 export default function UsersPageDashboard() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage] = useState(12);
+  const [usersPerPage] = useState(8);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -46,41 +47,49 @@ export default function UsersPageDashboard() {
   return (
     <AdminLayout>
       {loading ? (
-        <div>
-          <p>Loading...</p>
-        </div>
+        <Spinners />
       ) : (
-        <div className="container mx-auto mt-5">
-          <div className="flex flex-wrap -mx-4">
+        <div className="tw-container tw-mx-auto tw-mt-5 tw-pb-8">
+          <h2 className="tw-text-gray-500 tw-font-bold">User List</h2>
+          <div className="tw-flex tw-flex-wrap ">
             {currentUsers?.map((user) => (
-              <div className="w-full md:w-1/2 lg:w-1/3 px-4 mb-4" key={user.id}>
-                <div className="bg-white shadow rounded-lg overflow-hidden">
-                  <div className="p-4 flex flex-col items-center">
+              <div
+                className="tw-w-full sm:tw-w-1/2 md:tw-w-1/3 lg:tw-w-1/4 tw-px-4 tw-mb-4 b"
+                key={user.id}
+              >
+                <div className="tw-bg-slate-200 tw-shadow-lg tw-rounded-lg tw-overflow-hidden tw-transition-all tw-duration-300 hover:tw-shadow-none hover:tw-transition-all hover:tw-duration-300">
+                  <div className="tw-p-2 tw-flex tw-flex-col tw-items-center">
                     <img
                       src={user.profilePictureUrl}
                       alt="Profile"
-                      className="w-24 h-24 rounded-full mb-4"
+                      className="tw-w-24 tw-h-24 tw-rounded-full tw-mb-4"
                     />
-                    <h5 className="text-gray-900 font-bold text-xl">
+                    <h5 className="tw-text-gray-900 tw-font-bold tw-text-xl">
                       {user.name}
                     </h5>
-                    <p className="text-gray-700">{user.email}</p>
                   </div>
-                  <div className="p-4 border-t border-gray-200">
-                    <p className="text-gray-600">Phone: {user.phoneNumber}</p>
-                    <p className="text-gray-600">Role: {user.role}</p>
+                  <div className="tw-px-4 tw-border-t tw-border-gray-200">
+                    <p className="tw-text-gray-600">{user.email}</p>
+                    <p className="tw-text-gray-600">
+                      Phone: {user.phoneNumber}
+                    </p>
+                    <p className="tw-text-gray-600">Role: {user.role}</p>
                   </div>
-                  <div className="p-4 border-t border-gray-200 text-right">
+                  <div className="tw-p-4 tw-border-t tw-border-gray-200 tw-text-right">
                     {user.role.toLowerCase() !== "admin" ? (
                       <Button
                         title={"Update to Admin"}
-                        style={"bg-blue-500 text-white hover:bg-blue-600"}
+                        style={
+                          "tw-bg-blue-500 tw-text-white hover:tw-bg-blue-600"
+                        }
                         onClick={() => handleRoleUpdate(user.id, "admin")}
                       />
                     ) : (
                       <Button
                         title={"Already Admin"}
-                        style={"bg-gray-400 text-white cursor-not-allowed"}
+                        style={
+                          "tw-bg-gray-400 tw-text-white tw-cursor-not-allowed"
+                        }
                         disabled={true}
                       />
                     )}
