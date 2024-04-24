@@ -3,10 +3,11 @@ import Input from "@/components/Input";
 import Link from "next/link";
 import { loginImage } from "@/utils/data";
 import Slider from "react-slick";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { registerUser } from "@/utils/api";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import Spinners from "@/components/Spinners";
 
 export default function SignUpPage() {
   const [firstName, setFirstName] = useState("");
@@ -15,7 +16,17 @@ export default function SignUpPage() {
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isPageLoading, setIsPageLoading] = useState(true);
   const router = useRouter();
+
+  useEffect(() => {
+    // Simulasi loading halaman
+    const timer = setTimeout(() => {
+      setIsPageLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,6 +54,7 @@ export default function SignUpPage() {
     const role = "admin";
 
     try {
+      setIsLoading(true);
       const response = await registerUser({
         name,
         email,
@@ -63,10 +75,11 @@ export default function SignUpPage() {
       }, 3000);
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // Pengaturan untuk Slider
   const settings = {
     dots: true,
     infinite: true,
@@ -78,6 +91,10 @@ export default function SignUpPage() {
     prevArrow: <></>,
     nextArrow: <></>,
   };
+
+  if (isPageLoading) {
+    return <Spinners />;
+  }
 
   return (
     <div className="tw-bg-gray-50 tw-min-h-screen tw-flex tw-items-center tw-justify-center">
@@ -138,7 +155,8 @@ export default function SignUpPage() {
             <Button
               title="Register"
               type="submit"
-              style={"tw-bg-gray-300 hover:tw-bg-gray-400"}
+              style={"tw-bg-blue-500 hover:tw-bg-blue-700 tw-text-white"}
+              isLoading={isLoading}
             />
             <p className="tw-text-gray-700 tw-text-sm">
               Do you have an account? <Link href="/login">Login</Link>
