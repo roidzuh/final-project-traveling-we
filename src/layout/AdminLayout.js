@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
+import Spinners from "@/components/Spinners";
 import { isAuthenticated } from "@/utils/auth";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -17,7 +18,11 @@ export default function AdminLayout({ children, user }) {
   }, [router]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Spinners />
+      </div>
+    );
   }
 
   return (
