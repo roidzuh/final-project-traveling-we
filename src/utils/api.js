@@ -33,31 +33,63 @@ const apiRequest = async (
   }
 };
 
+// BANNER
 export const fetchBanners = () => apiRequest("api/v1/banners");
 export const fetchBannerById = (bannerId) =>
   apiRequest(`api/v1/banner/${bannerId}`);
+export const deleteBanner = (bannerId, token) =>
+  apiRequest(`api/v1/delete-banner/${bannerId}`, "delete", null, token);
+export const updateBanner = (bannerId, data, token) =>
+  apiRequest(`api/v1/update-banner/${bannerId}`, "post", data, token);
+export const createBanner = (data, token) =>
+  apiRequest("api/v1/create-banner", "post", data, token);
+
+// PROMO
 export const fetchPromo = () => apiRequest("api/v1/promos");
 export const fetchPromoById = (promoId) =>
   apiRequest(`api/v1/promo/${promoId}`);
+export const deletePromo = (promoId, token) =>
+  apiRequest(`api/v1/delete-promo/${promoId}`, "delete", null, token);
+export const updatePromo = (promoId, data, token) =>
+  apiRequest(`api/v1/update-promo/${promoId}`, "post", data, token);
+export const createPromo = (data, token) =>
+  apiRequest("api/v1/create-promo", "post", data, token);
+
+// CATEGORY
 export const fetchCategory = () => apiRequest("api/v1/categories");
 export const fetchCategoryById = (categoryId) =>
   apiRequest(`api/v1/category/${categoryId}`);
+export const deleteCategory = (categoryId, token) =>
+  apiRequest(`api/v1/delete-category/${categoryId}`, "delete", null, token);
+export const updateCategory = (categoryId, data, token) =>
+  apiRequest(`api/v1/update-category/${categoryId}`, "post", data, token);
+export const createCategory = (data, token) =>
+  apiRequest("api/v1/create-category", "post", data, token);
+
+// ACTIVITY
 export const fetchActivity = () => apiRequest("api/v1/activities");
 export const fetchActivityById = (activityId) =>
   apiRequest(`api/v1/activity/${activityId}`);
 export const fetchActivityByCategoryId = (categoryId) =>
   apiRequest(`api/v1/activities-by-category/${categoryId}`);
+export const deleteActivity = (activityId, token) =>
+  apiRequest(`api/v1/delete-activity/${activityId}`, "delete", null, token);
+export const updateActivity = (activityId, data, token) =>
+  apiRequest(`api/v1/update-activity/${activityId}`, "post", data, token);
+export const createActivity = (data, token) =>
+  apiRequest("api/v1/create-activity", "post", data, token);
+
+// USER
 export const fetchUser = (token) =>
   apiRequest("api/v1/user", "get", null, token);
 export const fetchAllUser = (token) =>
   apiRequest("api/v1/all-user", "get", null, token);
-
 export const updateUserRole = (userId, role, token) =>
   apiRequest(`api/v1/update-user-role/${userId}`, "post", { role }, token);
-
 export const updateProfile = (data, token) =>
   apiRequest("api/v1/update-profile", "post", data, token);
 
+// AUTH
 export const handleLogin = async (email, password) => {
   try {
     const response = await apiRequest("api/v1/login", "post", {
@@ -85,6 +117,10 @@ export const handleLogout = async () => {
   }
 };
 
+export const registerUser = (data) =>
+  apiRequest("api/v1/register", "post", data);
+
+// IMAGE
 export const uploadImage = (file, token) => {
   const formData = new FormData();
   formData.append("image", file);
@@ -92,42 +128,3 @@ export const uploadImage = (file, token) => {
     "Content-Type": "multipart/form-data",
   });
 };
-
-export const deleteBanner = (bannerId, token) =>
-  apiRequest(`api/v1/delete-banner/${bannerId}`, "delete", null, token);
-
-export const deletePromo = (promoId, token) =>
-  apiRequest(`api/v1/delete-promo/${promoId}`, "delete", null, token);
-
-export const deleteCategory = (categoryId, token) =>
-  apiRequest(`api/v1/delete-category/${categoryId}`, "delete", null, token);
-
-export const updateCategory = (categoryId, data, token) =>
-  apiRequest(`api/v1/update-category/${categoryId}`, "post", data, token);
-
-export const updateBanner = (bannerId, data, token) =>
-  apiRequest(`api/v1/update-banner/${bannerId}`, "post", data, token);
-
-export const updatePromo = (promoId, data, token) =>
-  apiRequest(`api/v1/update-promo/${promoId}`, "post", data, token);
-
-export const createCategory = (data, token) =>
-  apiRequest("api/v1/create-category", "post", data, token);
-
-export const createBanner = (data, token) =>
-  apiRequest("api/v1/create-banner", "post", data, token);
-
-export const createPromo = (data, token) =>
-  apiRequest("api/v1/create-promo", "post", data, token);
-
-export const registerUser = (data) =>
-  apiRequest("api/v1/register", "post", data);
-
-export const createActivity = (data, token) =>
-  apiRequest("api/v1/create-activity", "post", data, token);
-
-export const updateActivity = (activityId, data, token) =>
-  apiRequest(`api/v1/update-activity/${activityId}`, "post", data, token);
-
-export const deleteActivity = (activityId, token) =>
-  apiRequest(`api/v1/delete-activity/${activityId}`, "delete", null, token);
