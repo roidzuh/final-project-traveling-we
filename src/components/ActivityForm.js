@@ -15,6 +15,7 @@ export default function ActivityForm({
           onChange={onInputChange}
           className="tw-border tw-rounded tw-py-2 tw-px-3 tw-mb-4"
         >
+          <option value="">Select Category</option>
           {categories.map((category) => (
             <option key={category.id} value={category.id}>
               {category.name}
@@ -34,13 +35,14 @@ export default function ActivityForm({
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col">
         <label>Description</label>
-        <Input
+        <textarea
           name="description"
-          type="text"
+          rows={3}
+          className="tw-p-2 tw-rounded-xl tw-border tw-py-2 tw-px-3 tw-mb-4"
           placeholder="Description"
           value={selectedActivity?.description || ""}
           onChange={onInputChange}
-        />
+        ></textarea>
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col">
         <label>Price</label>
@@ -50,6 +52,7 @@ export default function ActivityForm({
           placeholder="Price"
           value={selectedActivity?.price || ""}
           onChange={onInputChange}
+          min="0"
         />
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col">
@@ -60,6 +63,7 @@ export default function ActivityForm({
           placeholder="Price Discount"
           value={selectedActivity?.price_discount || ""}
           onChange={onInputChange}
+          min="0"
         />
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col">
@@ -70,6 +74,7 @@ export default function ActivityForm({
           placeholder="Rating"
           value={selectedActivity?.rating || ""}
           onChange={onInputChange}
+          min="0"
         />
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col">
@@ -80,6 +85,7 @@ export default function ActivityForm({
           placeholder="Total Reviews"
           value={selectedActivity?.total_reviews || ""}
           onChange={onInputChange}
+          min="0"
         />
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col">
