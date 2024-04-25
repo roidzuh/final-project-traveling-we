@@ -76,6 +76,10 @@ export default function ProfilePageDashboard() {
 
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
+    if (!profile.name || !profile.email || !profile.phoneNumber) {
+      toast.error("Please fill in all fields.");
+      return;
+    }
     setIsLoading(true);
     const token = localStorage.getItem("token");
     try {
