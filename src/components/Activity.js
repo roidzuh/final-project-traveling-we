@@ -15,6 +15,7 @@ export default function Activity({ activities }) {
       <div className="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 md:tw-grid-cols-3 tw-gap-4">
         {activities?.slice(0, 6).map((activity) => (
           <Link
+            data-aos="fade-up"
             key={activity.id}
             href={`/activity/${activity.id}`}
             className="tw-bg-white tw-rounded-lg tw-shadow-md tw-relative tw-no-underline tw-text-gray-800 tw-border tw-border-gray-300 hover:tw-shadow-lg"

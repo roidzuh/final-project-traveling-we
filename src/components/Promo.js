@@ -47,6 +47,7 @@ export default function Promo({ promos }) {
       <Slider {...settings}>
         {promos.map((promo) => (
           <Link
+            data-aos="fade-up"
             key={promo.id}
             href={`/promo/${promo.id}`}
             className="tw-px-4 tw-py-4 tw-bg-transparent"

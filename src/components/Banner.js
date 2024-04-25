@@ -13,7 +13,10 @@ export default function Banner({ banners }) {
   };
 
   return (
-    <div className="tw-bg-white tw-text-gray-600 tw-w-full tw-mb-16 tw-mt-16">
+    <div
+      className="tw-bg-white tw-text-gray-600 tw-w-full tw-mb-16 tw-mt-16"
+      data-aos="fade-up"
+    >
       <Slider {...settings}>
         {banners.map((banner) => (
           <div key={banner.id} className="tw-relative tw-group">

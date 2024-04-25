@@ -9,7 +9,10 @@ export default function Hero() {
           "linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7)), url('/hero-img.jpg')",
       }}
     >
-      <div className="tw-z-10 tw-px-6 sm:tw-px-8 lg:tw-px-12 tw-relative tw-top-36">
+      <div
+        className="tw-z-10 tw-px-6 sm:tw-px-8 lg:tw-px-12 tw-relative tw-top-36"
+        data-aos="zoom-in"
+      >
         <h1 className="tw-text-white tw-text-4xl sm:tw-text-5xl md:tw-text-6xl lg:tw-text-7xl tw-font-bold tw-mb-6">
           Explore the World With Us
         </h1>
