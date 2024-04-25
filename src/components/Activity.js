@@ -4,7 +4,7 @@ import { FaStar, FaLocationDot } from "react-icons/fa6";
 
 export default function Activity({ activities }) {
   return (
-    <div className="tw-bg-white tw-p-4 tw-text-gray-800 tw-px-4 sm:tw-px-6 lg:tw-px-8 tw-py-6 sm:tw-py-8 lg:tw-py-10 tw-rounded-lg tw-shadow-lg">
+    <div className="tw-bg-slate-200 tw-p-4 tw-text-gray-800 tw-px-4 sm:tw-px-6 lg:tw-px-8 tw-py-6 sm:tw-py-8 lg:tw-py-10 tw-rounded-lg tw-shadow-lg">
       <h2 className="tw-text-2xl tw-font-bold tw-mb-4 tw-text-center">
         Explore Activities
       </h2>
@@ -13,14 +13,14 @@ export default function Activity({ activities }) {
         innovation.
       </p>
       <div className="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 md:tw-grid-cols-3 tw-gap-4">
-        {activities.slice(0, 6).map((activity) => (
+        {activities?.slice(0, 6).map((activity) => (
           <Link
             key={activity.id}
             href={`/activity/${activity.id}`}
             className="tw-bg-white tw-rounded-lg tw-shadow-md tw-relative tw-no-underline tw-text-gray-800 tw-border tw-border-gray-300 hover:tw-shadow-lg"
           >
             <img
-              src={activity.imageUrls[0]}
+              src={activity?.imageUrls || "https://placehold.co/600x400"}
               alt={activity.title}
               className="tw-w-full tw-h-48 tw-object-cover tw-rounded-t-lg"
             />

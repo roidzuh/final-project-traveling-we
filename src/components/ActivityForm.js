@@ -11,7 +11,7 @@ export default function ActivityForm({
         <label>Category</label>
         <select
           name="category"
-          value={selectedActivity?.category || ""}
+          value={selectedActivity?.categoryId || ""}
           onChange={onInputChange}
           className="tw-border tw-rounded tw-py-2 tw-px-3 tw-mb-4"
         >

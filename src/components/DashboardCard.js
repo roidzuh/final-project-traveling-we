@@ -3,7 +3,7 @@ import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import ButtonIcon from "./ButtonIcon";
 
 export default function DashboardCard({
-  banner,
+  linkId,
   onEdit,
   onDelete,
   image,
@@ -34,15 +34,15 @@ export default function DashboardCard({
             </p>
           </div>
         </div>
-        <div className="tw-flex tw-items-center tw-justify-center tw-gap-4 tw-mt-4">
-          <Link href={`/dashboard/banner/${id}`}>
-            <FaEye className="tw-text-3xl tw-text-black" />
+        <div className="tw-flex tw-items-center tw-justify-center tw-gap-8 tw-mt-4">
+          <Link href={linkId}>
+            <FaEye className="tw-text-4xl tw-text-black tw-bg-gray-200 tw-p-2 tw-rounded-lg hover:tw-bg-gray-400" />
           </Link>
           <ButtonIcon onClick={onEdit}>
-            <FaEdit className="tw-text-3xl tw-text-black" />
+            <FaEdit className="tw-text-4xl tw-text-black tw-bg-gray-200 tw-p-2 tw-rounded-lg hover:tw-bg-gray-400" />
           </ButtonIcon>
           <ButtonIcon onClick={onDelete}>
-            <FaTrash className="tw-text-3xl tw-text-black" />
+            <FaTrash className="tw-text-4xl tw-text-black tw-bg-gray-200 tw-p-2 tw-rounded-lg hover:tw-bg-gray-400" />
           </ButtonIcon>
         </div>
       </div>

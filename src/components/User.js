@@ -24,10 +24,15 @@ export default function User() {
         />
       </div>
       <div>
-        <h1 className="tw-text-xl tw-font-bold">{user?.name}</h1>
+        <h1 className="tw-text-xl tw-font-bold tw-text-gray-700">
+          {user?.name}
+        </h1>
         <p className="tw-text-sm tw-text-gray-500">{user?.email}</p>
       </div>
-      <ButtonIcon onClick={() => router.push("/dashboard/profile")}>
+      <ButtonIcon
+        onClick={() => router.push("/dashboard/profile")}
+        style="tw-p-2 tw-bg-slate-300 tw-rounded-md hover:tw-bg-slate-400 hover:tw-rounded-lg tw-text-gray-600"
+      >
         <HiMiniUser className="tw-w-6 tw-h-6" />
       </ButtonIcon>
     </div>

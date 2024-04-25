@@ -6,11 +6,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { setIsOpen } from "@/features/slices/navbarSlice";
 import { useEffect, useRef } from "react";
 import { HiMiniBars3, HiXCircle } from "react-icons/hi2";
+import { useRouter } from "next/router";
 
 export default function Navbar() {
   const isOpen = useSelector((state) => state.navbar.isOpen);
   const dispatch = useDispatch();
   const menuRef = useRef();
+  const router = useRouter();
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -29,7 +31,7 @@ export default function Navbar() {
     <nav className="tw-bg-white tw-flex tw-items-center tw-justify-between tw-px-12 tw-py-2 tw-z-50 tw-mx-auto tw-max-w[1440px] tw-shadow-xl tw-rounded-full tw-fixed tw-w-[95%] tw-top-4 tw-left-[2.5%]">
       <Link
         href="/"
-        className="tw-text-black tw-text-3xl tw-font-bold tw-no-underline"
+        className="tw-text-gray-800 tw-text-3xl tw-font-bold tw-no-underline"
       >
         TravelGo
       </Link>
@@ -38,7 +40,11 @@ export default function Navbar() {
           <Link
             href={link.href}
             key={link.title}
-            className="tw-flex tw-items-center tw-gap-2 tw-no-underline tw-relative tw-text-black tw-group"
+            className={` ${
+              router.pathname === link.href
+                ? "tw-flex tw-items-center tw-gap-2 tw-no-underline tw-relative tw-text-black tw-font-bold tw-group"
+                : "tw-flex tw-items-center tw-gap-2 tw-no-underline tw-relative tw-text-gray-600 tw-group"
+            }`}
           >
             <link.icon />
             {link.title}
@@ -64,9 +70,13 @@ export default function Navbar() {
         >
           {navLinks.map((link) => (
             <Link
-              href={link.href}
               key={link.title}
-              className="tw-flex tw-gap-2 tw-no-underline tw-text-black hover:tw-bg-slate-300 tw-p-4 tw-transition-all tw-ease-in tw-duration-300"
+              href={link.href}
+              className={` ${
+                router.pathname === link.href
+                  ? "tw-flex tw-items-center tw-gap-2 tw-no-underline tw-text-black tw-font-bold hover:tw-bg-slate-300 tw-p-4 tw-transition-all tw-ease-in tw-duration-3000"
+                  : "tw-flex tw-items-center tw-gap-2 tw-no-underline tw-text-gray-600 hover:tw-bg-slate-300 tw-p-4 tw-transition-all tw-ease-in tw-duration-300"
+              }`}
             >
               <link.icon />
               {link.title}
