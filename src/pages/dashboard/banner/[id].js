@@ -26,7 +26,7 @@ export default function DashboardBannerDetail() {
         {isLoading ? (
           <Spinners />
         ) : (
-          <div className="md:tw-flex tw-no-wrap md:tw-mx-2">
+          <div className="md:tw-flex tw-no-wrap md:tw-mx-2" data-aos="zoom-in">
             <div className="tw-w-full md:tw-w-3/12 md:tw-mx-2">
               <div className="tw-bg-white tw-p-3 tw-border-t-4 tw-border-green-400">
                 <div className="tw-image tw-overflow-hidden">

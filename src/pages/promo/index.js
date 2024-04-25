@@ -24,6 +24,7 @@ export default function PromoPage() {
           <div className="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-4 tw-gap-4">
             {promos.map((promo) => (
               <Link
+                data-aos="fade-up"
                 key={promo.id}
                 href={`/promo/${promo.id}`}
                 className="tw-bg-white tw-rounded-lg tw-shadow tw-overflow-hidden tw-no-underline tw-text-gray-600"

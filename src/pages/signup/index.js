@@ -106,7 +106,10 @@ export default function SignUpPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="tw-bg-gray-50 tw-min-h-screen tw-flex tw-items-center tw-justify-center">
-        <div className="tw-bg-gray-100 tw-flex tw-rounded-2xl tw-shadow-lg tw-max-w-4xl tw-p-3">
+        <div
+          className="tw-bg-gray-100 tw-flex tw-rounded-2xl tw-shadow-lg tw-max-w-4xl tw-p-3"
+          data-aos="zoom-in"
+        >
           <div className="md:tw-w-1/2 ">
             <h1 className="tw-text-2xl tw-font-bold tw-text-gray-800 ">
               TravelGo

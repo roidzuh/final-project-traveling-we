@@ -31,7 +31,7 @@ export default function ActivityDetail() {
         {isLoading ? (
           <Spinners />
         ) : (
-          <div className="md:tw-flex tw-no-wrap md:tw-mx-2">
+          <div className="md:tw-flex tw-no-wrap md:tw-mx-2" data-aos="zoom-in">
             <div className="tw-w-full md:tw-w-3/12 md:tw-mx-2">
               <div className="tw-bg-white tw-p-3 tw-border-t-4 tw-border-green-400">
                 <div className="tw-image tw-overflow-hidden">
@@ -166,7 +166,7 @@ export default function ActivityDetail() {
             </div>
           </div>
         )}
-        <div className="tw-w-full tw-mx-auto tw-my-8">
+        <div className="tw-w-full tw-mx-auto tw-my-8" data-aos="zoom-in">
           <div className="tw-bg-gray-100 tw-p-3 tw-shadow-sm tw-rounded-sm">
             <div className="tw-px-4 tw-py-2 tw-font-semibold">Location Map</div>
             <div
