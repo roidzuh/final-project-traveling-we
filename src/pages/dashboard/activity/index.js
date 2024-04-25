@@ -155,7 +155,6 @@ export default function ActivityPageDashboard() {
       toast.error(error.message);
     } finally {
       setIsSubmitting(false);
-      console.log(imageFile, imageUrls, selectedActivity.imageUrls);
     }
   };
 
@@ -199,7 +198,7 @@ export default function ActivityPageDashboard() {
       {loading ? (
         <Spinners />
       ) : (
-        <div className="tw-container tw-mx-auto ">
+        <div className="tw-container tw-mx-auto">
           <div className="tw-overflow-x-auto tw-pb-8">
             <div className="tw-flex tw-justify-between tw-mb-4 tw-p-4">
               <h2 className="tw-text-gray-500 tw-font-bold">Activity List</h2>

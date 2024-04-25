@@ -10,7 +10,7 @@ export default function ActivityForm({
       <div className="tw-font-bold tw-flex tw-flex-col">
         <label>Category</label>
         <select
-          name="category"
+          name="categoryId"
           value={selectedActivity?.categoryId || ""}
           onChange={onInputChange}
           className="tw-border tw-rounded tw-py-2 tw-px-3 tw-mb-4"
