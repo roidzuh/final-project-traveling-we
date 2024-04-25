@@ -60,6 +60,7 @@ export default function PromoForm({ selectedPromo, onInputChange }) {
           placeholder="Promo Discount Price"
           value={selectedPromo?.promo_discount_price || ""}
           onChange={onInputChange}
+          min="0"
         />
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col">
@@ -70,6 +71,7 @@ export default function PromoForm({ selectedPromo, onInputChange }) {
           placeholder="Minimum Claim Price"
           value={selectedPromo?.minimum_claim_price || ""}
           onChange={onInputChange}
+          min="0"
         />
       </div>
     </>
