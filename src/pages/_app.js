@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import store from "@/features/store";
 import "@/styles/globals.css";
 import { Provider } from "react-redux";
@@ -6,8 +7,17 @@ import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import Aos from "aos";
 
 export default function App({ Component, pageProps }) {
+  useEffect(() => {
+    AOS.init({
+      offset: 120,
+      duration: 3000,
+    });
+  }, []);
   return (
     <Provider store={store}>
       <Component {...pageProps} />
