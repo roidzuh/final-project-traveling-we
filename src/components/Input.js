@@ -5,6 +5,7 @@ export default function Input({
   value,
   style,
   onChange,
+  min,
 }) {
   return (
     <input
@@ -14,6 +15,7 @@ export default function Input({
       value={value}
       onChange={onChange}
       className={`${style} tw-p-2 tw-rounded-xl tw-border`}
+      min={min}
     />
   );
 }
