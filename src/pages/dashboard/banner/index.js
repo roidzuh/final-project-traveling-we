@@ -191,6 +191,7 @@ export default function BannerPageDashboard() {
               {currentBanners?.map((banner) => (
                 <DashboardCard
                   key={banner.id}
+                  linkId={`/dashboard/banner/${banner.id}`}
                   image={banner.imageUrl}
                   name={banner.name}
                   id={banner.id}
@@ -202,7 +203,7 @@ export default function BannerPageDashboard() {
               ))}
             </div>
             <Pagination
-              itemsCount={banners.length}
+              itemsCount={banners?.length}
               pageSize={bannersPerPage}
               currentPage={currentPage}
               onPageChange={setCurrentPage}

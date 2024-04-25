@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { fetchPromoById } from "@/utils/api";
+import { fetchActivityById } from "@/utils/api";
 import Spinners from "@/components/Spinners";
 import AdminLayout from "@/layout/AdminLayout";
 
-export default function DashboardPromoDetail() {
-  const [promo, setPromo] = useState(null);
+export default function DashboardActivityDetail() {
+  const [activity, setActivity] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const router = useRouter();
@@ -14,8 +14,8 @@ export default function DashboardPromoDetail() {
   useEffect(() => {
     if (id) {
       setIsLoading(true);
-      fetchPromoById(id).then((data) => {
-        setPromo(data.data);
+      fetchActivityById(id).then((data) => {
+        setActivity(data.data);
         setIsLoading(false);
       });
     }
@@ -27,7 +27,7 @@ export default function DashboardPromoDetail() {
 
   return (
     <AdminLayout>
-      <div className="tw-container tw-mx-auto tw-my-4 tw-p-2 ">
+      <div className="tw-container tw-mx-auto tw-my-4 tw-p-2">
         {isLoading ? (
           <Spinners />
         ) : (
@@ -37,12 +37,12 @@ export default function DashboardPromoDetail() {
                 <div className="tw-image tw-overflow-hidden">
                   <img
                     className="tw-h-auto tw-w-full tw-mx-auto tw-rounded-md"
-                    src={promo.imageUrl}
-                    alt={promo.title}
+                    src={activity?.imageUrls[0]}
+                    alt={activity.title}
                   />
                 </div>
                 <h1 className="tw-text-gray-900 tw-font-bold tw-text-xl tw-my-1">
-                  {promo.title}
+                  {activity.title}
                 </h1>
                 <ul className="tw-bg-gray-100 tw-text-gray-600 hover:tw-text-gray-700 hover:tw-shadow tw-py-2 tw-px-3 tw-mt-3 tw-rounded tw-shadow-sm">
                   <li className="tw-flex tw-items-center tw-py-3">
@@ -50,6 +50,11 @@ export default function DashboardPromoDetail() {
                     <span className="tw-ml-auto">
                       <span className="tw-bg-green-500 tw-py-1 tw-px-2 tw-rounded"></span>
                     </span>
+                  </li>
+
+                  <li className="tw-flex tw-items-center tw-py-3">
+                    <span>Category</span>
+                    <span className="tw-ml-auto">{activity.category.name}</span>
                   </li>
                 </ul>
               </div>
@@ -63,23 +68,23 @@ export default function DashboardPromoDetail() {
                   <div className="tw-grid md:tw-grid-cols-2 tw-text-sm tw-gap-4">
                     <div className="tw-grid tw-grid-cols-2">
                       <div className="tw-px-4 tw-py-2 tw-font-semibold">ID</div>
-                      <div className="tw-px-4 tw-py-2">{promo.id}</div>
+                      <div className="tw-px-4 tw-py-2">{activity.id}</div>
                     </div>
                     <div className="tw-grid tw-grid-cols-2">
                       <div className="tw-px-4 tw-py-2 tw-font-semibold">
                         Title
                       </div>
-                      <div className="tw-px-4 tw-py-2">{promo.title}</div>
+                      <div className="tw-px-4 tw-py-2">{activity.title}</div>
                     </div>
                     <div className="tw-grid tw-grid-cols-2">
                       <div className="tw-px-4 tw-py-2 tw-font-semibold">
                         Description
                       </div>
                       <div className="tw-px-4 tw-py-2">
-                        {promo.description.length > 100 ? (
+                        {activity.description.length > 100 ? (
                           showFullDescription ? (
                             <span>
-                              {promo.description}{" "}
+                              {activity.description}{" "}
                               <span
                                 onClick={toggleDescription}
                                 className="tw-text-blue-500 tw-cursor-pointer tw-underline"
@@ -89,7 +94,7 @@ export default function DashboardPromoDetail() {
                             </span>
                           ) : (
                             <span>
-                              {promo.description.substring(0, 100)}...{" "}
+                              {activity.description.substring(0, 100)}...{" "}
                               <span
                                 onClick={toggleDescription}
                                 className="tw-text-blue-500 tw-cursor-pointer tw-underline"
@@ -99,38 +104,64 @@ export default function DashboardPromoDetail() {
                             </span>
                           )
                         ) : (
-                          <span>{promo.description}</span>
+                          <span>{activity.description}</span>
                         )}
                       </div>
                     </div>
                     <div className="tw-grid tw-grid-cols-2">
                       <div className="tw-px-4 tw-py-2 tw-font-semibold">
-                        Terms and Conditions
+                        Address
+                      </div>
+                      <div className="tw-px-4 tw-py-2">{activity.address}</div>
+                    </div>
+                    <div className="tw-grid tw-grid-cols-2">
+                      <div className="tw-px-4 tw-py-2 tw-font-semibold">
+                        City
+                      </div>
+                      <div className="tw-px-4 tw-py-2">{activity.city}</div>
+                    </div>
+                    <div className="tw-grid tw-grid-cols-2">
+                      <div className="tw-px-4 tw-py-2 tw-font-semibold">
+                        Facilities
                       </div>
                       <div className="tw-px-4 tw-py-2">
-                        {promo.terms_condition}
+                        {activity.facilities}
                       </div>
                     </div>
                     <div className="tw-grid tw-grid-cols-2">
                       <div className="tw-px-4 tw-py-2 tw-font-semibold">
-                        Promo Code
-                      </div>
-                      <div className="tw-px-4 tw-py-2">{promo.promo_code}</div>
-                    </div>
-                    <div className="tw-grid tw-grid-cols-2">
-                      <div className="tw-px-4 tw-py-2 tw-font-semibold">
-                        Promo Discount Price
+                        Price
                       </div>
                       <div className="tw-px-4 tw-py-2">
-                        IDR {promo.promo_discount_price}
+                        IDR {activity.price}
                       </div>
                     </div>
                     <div className="tw-grid tw-grid-cols-2">
                       <div className="tw-px-4 tw-py-2 tw-font-semibold">
-                        Minimum Claim Price
+                        Price Discount
                       </div>
                       <div className="tw-px-4 tw-py-2">
-                        IDR {promo.minimum_claim_price}
+                        IDR {activity.price_discount}
+                      </div>
+                    </div>
+                    <div className="tw-grid tw-grid-cols-2">
+                      <div className="tw-px-4 tw-py-2 tw-font-semibold">
+                        Province
+                      </div>
+                      <div className="tw-px-4 tw-py-2">{activity.province}</div>
+                    </div>
+                    <div className="tw-grid tw-grid-cols-2">
+                      <div className="tw-px-4 tw-py-2 tw-font-semibold">
+                        Rating
+                      </div>
+                      <div className="tw-px-4 tw-py-2">{activity.rating}</div>
+                    </div>
+                    <div className="tw-grid tw-grid-cols-2">
+                      <div className="tw-px-4 tw-py-2 tw-font-semibold">
+                        Total Review
+                      </div>
+                      <div className="tw-px-4 tw-py-2">
+                        {activity.total_reviews}
                       </div>
                     </div>
                     <div className="tw-grid tw-grid-cols-2">
@@ -138,7 +169,7 @@ export default function DashboardPromoDetail() {
                         Created At
                       </div>
                       <div className="tw-px-4 tw-py-2">
-                        {new Date(promo.createdAt).toLocaleString()}
+                        {new Date(activity.createdAt).toLocaleString()}
                       </div>
                     </div>
                     <div className="tw-grid tw-grid-cols-2">
@@ -146,7 +177,7 @@ export default function DashboardPromoDetail() {
                         Updated At
                       </div>
                       <div className="tw-px-4 tw-py-2">
-                        {new Date(promo.updatedAt).toLocaleString()}
+                        {new Date(activity.updatedAt).toLocaleString()}
                       </div>
                     </div>
                   </div>
@@ -155,6 +186,20 @@ export default function DashboardPromoDetail() {
             </div>
           </div>
         )}
+        <div className="tw-w-full tw-mx-auto tw-my-8">
+          <div className="tw-bg-gray-100 tw-p-3 tw-shadow-sm tw-rounded-sm">
+            <div className="tw-px-4 tw-py-2 tw-font-semibold">Location Map</div>
+            <div
+              className="tw-px-4 tw-py-2 tw-w-full"
+              dangerouslySetInnerHTML={{
+                __html: activity?.location_maps.replace(
+                  /width="[^"]*"/,
+                  'width="100%"'
+                ),
+              }}
+            ></div>
+          </div>
+        </div>
       </div>
     </AdminLayout>
   );

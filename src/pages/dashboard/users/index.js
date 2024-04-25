@@ -61,6 +61,9 @@ export default function UsersPageDashboard() {
                   <div className="tw-p-2 tw-flex tw-flex-col tw-items-center">
                     <img
                       src={user.profilePictureUrl}
+                      onError={(e) =>
+                        (e.target.src = "https://placehold.co/600x400")
+                      }
                       alt="Profile"
                       className="tw-w-24 tw-h-24 tw-rounded-full tw-mb-4"
                     />

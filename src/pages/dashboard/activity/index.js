@@ -199,7 +199,7 @@ export default function ActivityPageDashboard() {
       {loading ? (
         <Spinners />
       ) : (
-        <div className="tw-container tw-mx-auto">
+        <div className="tw-container tw-mx-auto ">
           <div className="tw-overflow-x-auto tw-pb-8">
             <div className="tw-flex tw-justify-between tw-mb-4 tw-p-4">
               <h2 className="tw-text-gray-500 tw-font-bold">Activity List</h2>
@@ -214,7 +214,8 @@ export default function ActivityPageDashboard() {
               {currentActivities?.map((activity) => (
                 <DashboardCard
                   key={activity.id}
-                  image={activity.imageUrls[0]}
+                  linkId={`/dashboard/activity/${activity.id}`}
+                  image={activity?.imageUrls[0]}
                   name={activity.title}
                   id={activity.id}
                   createdAt={activity.createdAt}
@@ -225,7 +226,7 @@ export default function ActivityPageDashboard() {
               ))}
             </div>
             <Pagination
-              itemsCount={activities.length}
+              itemsCount={activities?.length}
               pageSize={activitiesPerPage}
               currentPage={currentPage}
               onPageChange={setCurrentPage}

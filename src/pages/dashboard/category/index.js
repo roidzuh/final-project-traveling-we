@@ -189,6 +189,7 @@ export default function CategoryPageDashboard() {
               {currentCategories?.map((category) => (
                 <DashboardCard
                   key={category.id}
+                  linkId={`/dashboard/category/${category.id}`}
                   image={category.imageUrl}
                   name={category.name}
                   id={category.id}
@@ -200,7 +201,7 @@ export default function CategoryPageDashboard() {
               ))}
             </div>
             <Pagination
-              itemsCount={categories.length}
+              itemsCount={categories?.length}
               pageSize={categoriesPerPage}
               currentPage={currentPage}
               onPageChange={setCurrentPage}

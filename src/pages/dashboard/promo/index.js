@@ -207,6 +207,7 @@ export default function PromoPageDashboard() {
               {currentPromos?.map((promo) => (
                 <DashboardCard
                   key={promo.id}
+                  linkId={`/dashboard/promo/${promo.id}`}
                   image={promo.imageUrl}
                   name={promo.title}
                   id={promo.id}
@@ -218,7 +219,7 @@ export default function PromoPageDashboard() {
               ))}
             </div>
             <Pagination
-              itemsCount={promos.length}
+              itemsCount={promos?.length}
               pageSize={promosPerPage}
               currentPage={currentPage}
               onPageChange={setCurrentPage}

@@ -1,144 +1,94 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Input from "@/components/Input";
-import Button from "@/components/Button";
-import { fetchBannerById, updateBanner, uploadImage } from "@/utils/api";
-import { toast } from "react-toastify";
+import { fetchBannerById } from "@/utils/api";
+import Spinners from "@/components/Spinners";
 import AdminLayout from "@/layout/AdminLayout";
 
-export default function EditBannerPage() {
-  const [banner, setBanner] = useState({
-    name: "",
-    imageUrl: "",
-  });
-  const [imageFile, setImageFile] = useState(null);
-  const [loading, setLoading] = useState(false);
+export default function DashboardBannerDetail() {
+  const [banner, setBanner] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const { id } = router.query;
 
   useEffect(() => {
-    const getBanner = async () => {
-      setLoading(true);
-      const fetchedBanner = await fetchBannerById(id);
-      if (fetchedBanner.error) {
-        toast.error(fetchedBanner.message);
-      } else {
-        setBanner(fetchedBanner.data);
-      }
-      setLoading(false);
-    };
-
     if (id) {
-      getBanner();
+      setIsLoading(true);
+      fetchBannerById(id).then((data) => {
+        setBanner(data.data);
+        setIsLoading(false);
+      });
     }
   }, [id]);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "imageFile") {
-      setImageFile(e.target.files[0]);
-    } else {
-      setBanner((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    const token = localStorage.getItem("token");
-    let imageUrl = banner.imageUrl;
-    if (imageFile) {
-      const uploadResponse = await uploadImage(imageFile, token);
-      if (uploadResponse.error) {
-        toast.error(uploadResponse.message);
-        setLoading(false);
-        return;
-      }
-      imageUrl = uploadResponse.url;
-    }
-    const response = await updateBanner(id, { ...banner, imageUrl }, token);
-    if (response.error) {
-      toast.error(response.message);
-    } else {
-      toast.success(response.message);
-      router.push("/dashboard/banner");
-    }
-    setLoading(false);
-  };
-
   return (
     <AdminLayout>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <>
-          <div className="tw-mx-auto tw-my-5 tw-bg-white tw-p-5 tw-rounded-lg tw-shadow tw-max-w-[900px]">
-            <div className="tw-flex tw-gap-5 tw-items-center">
-              <img
-                src={banner.imageUrl}
-                alt={banner.name}
-                className="tw-w-64 tw-h-64 tw-object-cover tw-rounded-lg"
-              />
-              <div>
-                <p className="tw-text-lg tw-font-semibold">ID: {banner.id}</p>
-                <p className="tw-text-lg tw-font-semibold">
-                  Name: {banner.name}
-                </p>
-                <p className="tw-text-lg tw-font-semibold">
-                  Created At:{" "}
-                  {new Date(banner.createdAt).toLocaleDateString("id-ID", {
-                    weekday: "long",
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </p>
-                <p className="tw-text-lg tw-font-semibold">
-                  Updated At:{" "}
-                  {new Date(banner.updatedAt).toLocaleDateString("id-ID", {
-                    weekday: "long",
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </p>
+      <div className="tw-container tw-mx-auto tw-my-4 tw-p-2 ">
+        {isLoading ? (
+          <Spinners />
+        ) : (
+          <div className="md:tw-flex tw-no-wrap md:tw-mx-2">
+            <div className="tw-w-full md:tw-w-3/12 md:tw-mx-2">
+              <div className="tw-bg-white tw-p-3 tw-border-t-4 tw-border-green-400">
+                <div className="tw-image tw-overflow-hidden">
+                  <img
+                    className="tw-h-auto tw-w-full tw-mx-auto tw-rounded-md"
+                    src={banner.imageUrl}
+                    alt={banner.name}
+                  />
+                </div>
+                <h1 className="tw-text-gray-900 tw-font-bold tw-text-xl tw-my-1">
+                  {banner.name}
+                </h1>
+                <ul className="tw-bg-gray-100 tw-text-gray-600 hover:tw-text-gray-700 hover:tw-shadow tw-py-2 tw-px-3 tw-mt-3 tw-rounded tw-shadow-sm">
+                  <li className="tw-flex tw-items-center tw-py-3">
+                    <span>Status</span>
+                    <span className="tw-ml-auto">
+                      <span className="tw-bg-green-500 tw-py-1 tw-px-2 tw-rounded"></span>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="tw-w-full md:tw-w-9/12 tw-mx-2">
+              <div className="tw-bg-gray-100 tw-p-3 tw-shadow-sm tw-rounded-sm">
+                <div className="tw-flex tw-items-center tw-space-x-2 tw-font-semibold tw-text-gray-900">
+                  <span className="tw-tracking-wide">About</span>
+                </div>
+                <div className="tw-text-gray-700">
+                  <div className="tw-grid md:tw-grid-cols-2 tw-text-sm tw-gap-4">
+                    <div className="tw-grid tw-grid-cols-2">
+                      <div className="tw-px-4 tw-py-2 tw-font-semibold">ID</div>
+                      <div className="tw-px-4 tw-py-2">{banner.id}</div>
+                    </div>
+                    <div className="tw-grid tw-grid-cols-2">
+                      <div className="tw-px-4 tw-py-2 tw-font-semibold">
+                        Name
+                      </div>
+                      <div className="tw-px-4 tw-py-2">{banner.name}</div>
+                    </div>
+                    <div className="tw-grid tw-grid-cols-2">
+                      <div className="tw-px-4 tw-py-2 tw-font-semibold">
+                        Created At
+                      </div>
+                      <div className="tw-px-4 tw-py-2">
+                        {new Date(banner.createdAt).toLocaleString()}
+                      </div>
+                    </div>
+                    <div className="tw-grid tw-grid-cols-2">
+                      <div className="tw-px-4 tw-py-2 tw-font-semibold">
+                        Updated At
+                      </div>
+                      <div className="tw-px-4 tw-py-2">
+                        {new Date(banner.updatedAt).toLocaleString()}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
-          <div className="tw-mx-auto tw-my-5 tw-bg-white tw-p-5 tw-rounded-lg tw-shadow tw-max-w-[900px]">
-            <h1 className="tw-text-2xl tw-font-bold tw-mb-4">Edit Banner</h1>
-            <form onSubmit={handleSubmit}>
-              <div className="tw-flex tw-flex-col tw-gap-3">
-                <Input
-                  label="name"
-                  name="name"
-                  type="text"
-                  placeholder={"Banner Name"}
-                  value={banner.name}
-                  onChange={handleInputChange}
-                />
-                <Input
-                  label="Image File"
-                  name="imageFile"
-                  type="file"
-                  onChange={handleInputChange}
-                />
-                <Button
-                  title="Update Banner"
-                  type="submit"
-                  style={
-                    "tw-bg-blue-500 hover:tw-bg-blue-700 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded tw-ml-2 tw-self-end"
-                  }
-                />
-              </div>
-            </form>
-          </div>
-        </>
-      )}
+        )}
+      </div>
     </AdminLayout>
   );
 }
