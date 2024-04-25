@@ -86,7 +86,7 @@ export default function ActivityPageDashboard() {
       }
     } else {
       setSelectedActivity({
-        categoryId: categories[0]?.id || "",
+        categoryId: "",
       });
       dispatch(toggleCreateModal());
     }
@@ -112,13 +112,13 @@ export default function ActivityPageDashboard() {
       }
     }
     const activityData = {
-      categoryId: selectedActivity.categoryId || categories[0]?.id,
+      categoryId: selectedActivity.categoryId,
       title: selectedActivity.title,
       description: selectedActivity.description,
       price: Number(selectedActivity.price),
-      price_discount: selectedActivity.price_discount,
-      rating: selectedActivity.rating,
-      total_reviews: selectedActivity.total_reviews,
+      price_discount: Number(selectedActivity.price_discount),
+      rating: Number(selectedActivity.rating),
+      total_reviews: Number(selectedActivity.total_reviews),
       facilities: selectedActivity.facilities,
       address: selectedActivity.address,
       province: selectedActivity.province,
@@ -126,6 +126,24 @@ export default function ActivityPageDashboard() {
       location_maps: selectedActivity.location_maps,
       imageUrls: imageUrls,
     };
+    if (
+      !selectedActivity.categoryId ||
+      !selectedActivity.title ||
+      !selectedActivity.description ||
+      !selectedActivity.price ||
+      !selectedActivity.price_discount ||
+      !selectedActivity.rating ||
+      !selectedActivity.total_reviews ||
+      !selectedActivity.facilities ||
+      !selectedActivity.address ||
+      !selectedActivity.province ||
+      !selectedActivity.city ||
+      !selectedActivity.location_maps
+    ) {
+      toast.error("All fields must be filled");
+      setIsSubmitting(false);
+      return;
+    }
     try {
       let response;
       if (operation === updateActivity) {
