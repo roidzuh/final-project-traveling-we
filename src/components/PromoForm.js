@@ -15,23 +15,16 @@ export default function PromoForm({ selectedPromo, onInputChange }) {
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col">
         <label>Description</label>
-        <Input
+        <textarea
           name="description"
-          type="text"
+          rows={3}
+          className="tw-p-2 tw-rounded-xl tw-border tw-py-2 tw-px-3"
           placeholder="Promo Description"
           value={selectedPromo?.description || ""}
           onChange={onInputChange}
-        />
+        ></textarea>
       </div>
-      <div className="tw-font-bold tw-flex tw-flex-col">
-        <label>Image URL</label>
-        <Input
-          name="imageUrl"
-          type="file"
-          placeholder="Promo Image URL"
-          onChange={onInputChange}
-        />
-      </div>
+
       <div className="tw-font-bold tw-flex tw-flex-col">
         <label>Terms & Conditions</label>
         <Input
@@ -72,6 +65,16 @@ export default function PromoForm({ selectedPromo, onInputChange }) {
           value={selectedPromo?.minimum_claim_price || ""}
           onChange={onInputChange}
           min="0"
+        />
+      </div>
+      <div className="tw-font-bold tw-flex tw-flex-col">
+        <label>Image URL</label>
+        <Input
+          name="imageUrl"
+          type="file"
+          placeholder="Promo Image URL"
+          onChange={onInputChange}
+          style="tw-border-gray-300 tw-py-2 tw-px-3 file:tw-mr-4 file:tw-py-2 file:tw-px-4 file:tw-rounded-lg file:tw-border-0 file:tw-text-white file:tw-bg-blue-500 file:tw-cursor-pointer file:hover:tw-bg-blue-600"
         />
       </div>
     </>

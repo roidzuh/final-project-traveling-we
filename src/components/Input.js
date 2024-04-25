@@ -14,7 +14,7 @@ export default function Input({
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      className={`${style} tw-p-2 tw-rounded-xl tw-border`}
+      className={` tw-p-2 tw-rounded-xl tw-border ${style}`}
       min={min}
     />
   );

@@ -38,7 +38,7 @@ export default function ActivityForm({
         <textarea
           name="description"
           rows={3}
-          className="tw-p-2 tw-rounded-xl tw-border tw-py-2 tw-px-3 tw-mb-4"
+          className="tw-p-2 tw-rounded-xl tw-border tw-py-2 tw-px-3"
           placeholder="Description"
           value={selectedActivity?.description || ""}
           onChange={onInputChange}
@@ -140,7 +140,12 @@ export default function ActivityForm({
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col">
         <label>Image</label>
-        <Input name="image" type="file" onChange={onInputChange} />
+        <Input
+          name="image"
+          type="file"
+          onChange={onInputChange}
+          style="tw-border-gray-300 tw-py-2 tw-px-3 file:tw-mr-4 file:tw-py-2 file:tw-px-4 file:tw-rounded-lg file:tw-border-0 file:tw-text-white file:tw-bg-blue-500 file:tw-cursor-pointer file:hover:tw-bg-blue-600"
+        />
       </div>
     </>
   );
