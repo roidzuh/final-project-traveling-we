@@ -9,13 +9,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Aos from "aos";
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
     AOS.init({
-      offset: 120,
-      duration: 3000,
+      offset: -5,
+      duration: 2000,
     });
   }, []);
   return (
