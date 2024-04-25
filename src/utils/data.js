@@ -14,7 +14,7 @@ export const navLinks = [
 export const loginImage = [
   { id: 1, image: "/Login-bg.jpg", title: "Login" },
   { id: 2, image: "/login-bg-2.jpg", title: "Login" },
-  { id: 3, image: "/Login-bg-3.jpg", title: "Login" },
+  { id: 3, image: "/login-bg-3.jpg", title: "Login" },
 ];
 
 export const sidebarLink = [
