@@ -75,7 +75,7 @@ export default function ActivityPage() {
                   className="tw-bg-white tw-rounded-lg tw-shadow-md tw-relative tw-no-underline tw-text-gray-800 tw-border tw-border-gray-300 hover:tw-shadow-lg"
                 >
                   <img
-                    src={activity.imageUrls[0]}
+                    src={activity?.imageUrls[0]}
                     alt={activity.title}
                     className="tw-w-full tw-h-48 tw-object-cover tw-rounded-t-lg"
                   />

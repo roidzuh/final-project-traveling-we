@@ -37,7 +37,7 @@ export default function ActivityDetail() {
                 <div className="tw-image tw-overflow-hidden">
                   <img
                     className="tw-h-auto tw-w-full tw-mx-auto tw-rounded-md"
-                    src={activity.imageUrls[0]}
+                    src={activity?.imageUrls[0]}
                     alt={activity.title}
                   />
                 </div>
