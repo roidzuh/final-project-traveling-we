@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   toggleEditModal,
   toggleCreateModal,
+  toggleDeleteModal,
 } from "@/features/slices/modalSlice";
 import CategoryForm from "@/components/CategoryForm";
 import Spinners from "@/components/Spinners";
@@ -23,7 +24,7 @@ import DashboardCard from "@/components/DashboardCard";
 
 export default function CategoryPageDashboard() {
   const dispatch = useDispatch();
-  const { isEditModalOpen, isCreateModalOpen } = useSelector(
+  const { isEditModalOpen, isCreateModalOpen, isDeleteModalOpen } = useSelector(
     (state) => state.modal
   );
   const [categories, setCategories] = useState([]);
@@ -136,8 +137,7 @@ export default function CategoryPageDashboard() {
     }
   };
 
-  const handleEdit = () =>
-    handleCategoryOperation(updateCategory, selectedCategory.id);
+  const handleEdit = () => handleCategoryOperation(updateCategory);
   const handleCreate = () => handleCategoryOperation(createCategory);
   const handleDelete = async (categoryId) => {
     setIsSubmitting(true);
@@ -149,6 +149,7 @@ export default function CategoryPageDashboard() {
           categories.filter((category) => category.id !== categoryId)
         );
         toast.success(response.message);
+        dispatch(toggleDeleteModal());
       } else {
         toast.error(response.message);
       }
@@ -159,11 +160,20 @@ export default function CategoryPageDashboard() {
     }
   };
 
+  const handleToggleDelete = (categoryId) => {
+    setSelectedCategory(
+      categories.find((category) => category.id === categoryId)
+    );
+    dispatch(toggleDeleteModal());
+  };
+
   const resetCategoryState = () => {
     if (isEditModalOpen) {
       dispatch(toggleEditModal());
-    } else {
+    } else if (isCreateModalOpen) {
       dispatch(toggleCreateModal());
+    } else if (isDeleteModalOpen) {
+      dispatch(toggleDeleteModal());
     }
     setImageFile(null);
     setSelectedCategory(null);
@@ -177,7 +187,9 @@ export default function CategoryPageDashboard() {
         <div className="tw-container tw-mx-auto">
           <div className="tw-overflow-x-auto">
             <div className="tw-flex tw-justify-between tw-mb-4 tw-p-4">
-              <h2 className="tw-text-gray-500 tw-font-bold">Category List</h2>
+              <h2 className="tw-text-gray-500 tw-font-bold tw-text-lg md:tw-text-xl">
+                Category List
+              </h2>
               <Button
                 title="Create Category"
                 style="tw-bg-green-500 hover:tw-bg-green-700 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded"
@@ -196,7 +208,7 @@ export default function CategoryPageDashboard() {
                   createdAt={category.createdAt}
                   updatedAt={category.updatedAt}
                   onEdit={() => handleToggleEdit(category.id)}
-                  onDelete={() => handleDelete(category.id)}
+                  onDelete={() => handleToggleDelete(category.id)}
                 />
               ))}
             </div>
@@ -235,6 +247,17 @@ export default function CategoryPageDashboard() {
             selectedCategory={selectedCategory}
             onInputChange={handleInputChange}
           />
+        </Modal>
+      )}
+      {isDeleteModalOpen && (
+        <Modal
+          title={"Delete Category"}
+          buttonText={"Delete Category"}
+          onClose={resetCategoryState}
+          onSubmit={() => handleDelete(selectedCategory?.id)}
+          isSubmitting={isSubmitting}
+        >
+          <p>Are you sure you want to delete this category?</p>
         </Modal>
       )}
     </AdminLayout>

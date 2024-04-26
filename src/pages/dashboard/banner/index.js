@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   toggleEditModal,
   toggleCreateModal,
+  toggleDeleteModal,
 } from "@/features/slices/modalSlice";
 import BannerForm from "@/components/BannerForm";
 import Spinners from "@/components/Spinners";
@@ -23,7 +24,7 @@ import DashboardCard from "@/components/DashboardCard";
 
 export default function BannerPageDashboard() {
   const dispatch = useDispatch();
-  const { isEditModalOpen, isCreateModalOpen } = useSelector(
+  const { isEditModalOpen, isCreateModalOpen, isDeleteModalOpen } = useSelector(
     (state) => state.modal
   );
   const [banners, setBanners] = useState([]);
@@ -138,8 +139,7 @@ export default function BannerPageDashboard() {
     }
   };
 
-  const handleEdit = () =>
-    handleBannerOperation(updateBanner, selectedBanner.id);
+  const handleEdit = () => handleBannerOperation(updateBanner);
 
   const handleCreate = () => handleBannerOperation(createBanner);
 
@@ -151,6 +151,7 @@ export default function BannerPageDashboard() {
       if (!response.error) {
         setBanners(banners.filter((banner) => banner.id !== bannerId));
         toast.success(response.message);
+        dispatch(toggleDeleteModal());
       } else {
         toast.error(response.message);
       }
@@ -161,11 +162,18 @@ export default function BannerPageDashboard() {
     }
   };
 
+  const handleToggleDelete = (bannerId) => {
+    setSelectedBanner(banners.find((banner) => banner.id === bannerId));
+    dispatch(toggleDeleteModal());
+  };
+
   const resetBannerState = () => {
     if (isEditModalOpen) {
       dispatch(toggleEditModal());
-    } else {
+    } else if (isCreateModalOpen) {
       dispatch(toggleCreateModal());
+    } else if (isDeleteModalOpen) {
+      dispatch(toggleDeleteModal());
     }
     setImageFile(null);
     setSelectedBanner(null);
@@ -176,10 +184,12 @@ export default function BannerPageDashboard() {
       {loading ? (
         <Spinners />
       ) : (
-        <div className="tw-container tw-mx-auto">
+        <div className="tw-container tw-mx-auto tw-p-4">
           <div className="tw-overflow-x-auto">
-            <div className="tw-flex tw-justify-between tw-mb-4 tw-p-4">
-              <h2 className="tw-text-gray-500 tw-font-bold">Banner List</h2>
+            <div className="tw-flex tw-justify-between tw-mb-4">
+              <h2 className="tw-text-gray-500 tw-font-bold tw-text-lg md:tw-text-xl">
+                Banner List
+              </h2>
               <Button
                 title="Create Banner"
                 style="tw-bg-green-500 hover:tw-bg-green-700 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded"
@@ -187,7 +197,7 @@ export default function BannerPageDashboard() {
                 disabled={isSubmitting}
               />
             </div>
-            <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-4">
+            <div className="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 md:tw-grid-cols-3 tw-gap-4">
               {currentBanners?.map((banner) => (
                 <DashboardCard
                   key={banner.id}
@@ -198,7 +208,7 @@ export default function BannerPageDashboard() {
                   createdAt={banner.createdAt}
                   updatedAt={banner.updatedAt}
                   onEdit={() => handleToggleEdit(banner.id)}
-                  onDelete={() => handleDelete(banner.id)}
+                  onDelete={() => handleToggleDelete(banner.id)}
                 />
               ))}
             </div>
@@ -237,6 +247,17 @@ export default function BannerPageDashboard() {
             selectedBanner={selectedBanner}
             onInputChange={handleInputChange}
           />
+        </Modal>
+      )}
+      {isDeleteModalOpen && (
+        <Modal
+          title={"Confirm Delete"}
+          buttonText={"Delete"}
+          onClose={() => dispatch(toggleDeleteModal())}
+          onSubmit={() => handleDelete(selectedBanner?.id)}
+          isSubmitting={isSubmitting}
+        >
+          <p>Are you sure you want to delete this banner?</p>
         </Modal>
       )}
     </AdminLayout>

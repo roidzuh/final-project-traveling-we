@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   toggleEditModal,
   toggleCreateModal,
+  toggleDeleteModal,
 } from "@/features/slices/modalSlice";
 import ActivityForm from "@/components/ActivityForm";
 import Spinners from "@/components/Spinners";
@@ -24,7 +25,7 @@ import DashboardCard from "@/components/DashboardCard";
 
 export default function ActivityPageDashboard() {
   const dispatch = useDispatch();
-  const { isEditModalOpen, isCreateModalOpen } = useSelector(
+  const { isEditModalOpen, isCreateModalOpen, isDeleteModalOpen } = useSelector(
     (state) => state.modal
   );
   const [activities, setActivities] = useState([]);
@@ -176,8 +177,7 @@ export default function ActivityPageDashboard() {
     }
   };
 
-  const handleEdit = () =>
-    handleActivityOperation(updateActivity, selectedActivity.id);
+  const handleEdit = () => handleActivityOperation(updateActivity);
 
   const handleCreate = () => handleActivityOperation(createActivity);
 
@@ -191,6 +191,7 @@ export default function ActivityPageDashboard() {
           activities.filter((activity) => activity.id !== activityId)
         );
         toast.success(response.message);
+        dispatch(toggleDeleteModal());
       } else {
         toast.error(response.message);
       }
@@ -201,11 +202,20 @@ export default function ActivityPageDashboard() {
     }
   };
 
+  const handleToggleDelete = (activityId) => {
+    setSelectedActivity(
+      activities.find((activity) => activity.id === activityId)
+    );
+    dispatch(toggleDeleteModal());
+  };
+
   const resetActivityState = () => {
     if (isEditModalOpen) {
       dispatch(toggleEditModal());
-    } else {
+    } else if (isCreateModalOpen) {
       dispatch(toggleCreateModal());
+    } else if (isDeleteModalOpen) {
+      dispatch(toggleDeleteModal());
     }
     setImageFile(null);
     setSelectedActivity(null);
@@ -219,7 +229,9 @@ export default function ActivityPageDashboard() {
         <div className="tw-container tw-mx-auto">
           <div className="tw-overflow-x-auto tw-pb-8">
             <div className="tw-flex tw-justify-between tw-mb-4 tw-p-4">
-              <h2 className="tw-text-gray-500 tw-font-bold">Activity List</h2>
+              <h2 className="tw-text-gray-500 tw-font-bold tw-text-lg md:tw-text-xl">
+                Activity List
+              </h2>
               <Button
                 title="Create Activity"
                 style="tw-bg-green-500 hover:tw-bg-green-700 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded"
@@ -238,7 +250,7 @@ export default function ActivityPageDashboard() {
                   createdAt={activity.createdAt}
                   updatedAt={activity.updatedAt}
                   onEdit={() => handleToggleEdit(activity.id)}
-                  onDelete={() => handleDelete(activity.id)}
+                  onDelete={() => handleToggleDelete(activity.id)}
                 />
               ))}
             </div>
@@ -279,6 +291,17 @@ export default function ActivityPageDashboard() {
             onInputChange={handleInputChange}
             categories={categories}
           />
+        </Modal>
+      )}
+      {isDeleteModalOpen && (
+        <Modal
+          title={"Delete Activity"}
+          buttonText={"Delete Activity"}
+          onClose={resetActivityState}
+          onSubmit={() => handleDelete(selectedActivity?.id)}
+          isSubmitting={isSubmitting}
+        >
+          <p>Are you sure you want to delete this activity?</p>
         </Modal>
       )}
     </AdminLayout>

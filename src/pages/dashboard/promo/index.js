@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   toggleEditModal,
   toggleCreateModal,
+  toggleDeleteModal,
 } from "@/features/slices/modalSlice";
 import PromoForm from "@/components/PromoForm";
 import Spinners from "@/components/Spinners";
@@ -23,7 +24,7 @@ import DashboardCard from "@/components/DashboardCard";
 
 export default function PromoPageDashboard() {
   const dispatch = useDispatch();
-  const { isEditModalOpen, isCreateModalOpen } = useSelector(
+  const { isEditModalOpen, isCreateModalOpen, isDeleteModalOpen } = useSelector(
     (state) => state.modal
   );
   const [promos, setPromos] = useState([]);
@@ -33,7 +34,7 @@ export default function PromoPageDashboard() {
   const [selectedPromo, setSelectedPromo] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [promosPerPage] = useState(6);
-  const currentPromos = promos.slice(
+  const currentPromos = promos?.slice(
     currentPage * promosPerPage - promosPerPage,
     currentPage * promosPerPage
   );
@@ -167,6 +168,7 @@ export default function PromoPageDashboard() {
       if (!response.error) {
         setPromos(promos.filter((promo) => promo.id !== promoId));
         toast.success(response.message);
+        dispatch(toggleDeleteModal());
       } else {
         toast.error(response.message);
       }
@@ -177,11 +179,18 @@ export default function PromoPageDashboard() {
     }
   };
 
+  const handleToggleDelete = (promoId) => {
+    setSelectedPromo(promos.find((promo) => promo.id === promoId));
+    dispatch(toggleDeleteModal());
+  };
+
   const resetPromoState = () => {
     if (isEditModalOpen) {
       dispatch(toggleEditModal());
-    } else {
+    } else if (isCreateModalOpen) {
       dispatch(toggleCreateModal());
+    } else if (isDeleteModalOpen) {
+      dispatch(toggleDeleteModal());
     }
     setImageFile(null);
     setSelectedPromo(null);
@@ -195,7 +204,9 @@ export default function PromoPageDashboard() {
         <div className="tw-container tw-mx-auto">
           <div className="tw-overflow-x-auto">
             <div className="tw-flex tw-justify-between tw-mb-4 tw-p-4">
-              <h2 className="tw-text-gray-500 tw-font-bold">Promo List</h2>
+              <h2 className="tw-text-gray-500 tw-font-bold tw-text-lg md:tw-text-xl">
+                Promo List
+              </h2>
               <Button
                 title="Create Promo"
                 style="tw-bg-green-500 hover:tw-bg-green-700 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded"
@@ -214,7 +225,7 @@ export default function PromoPageDashboard() {
                   createdAt={promo.createdAt}
                   updatedAt={promo.updatedAt}
                   onEdit={() => handleToggleEdit(promo.id)}
-                  onDelete={() => handleDelete(promo.id)}
+                  onDelete={() => handleToggleDelete(promo.id)}
                 />
               ))}
             </div>
@@ -253,6 +264,17 @@ export default function PromoPageDashboard() {
             selectedPromo={selectedPromo}
             onInputChange={handleInputChange}
           />
+        </Modal>
+      )}
+      {isDeleteModalOpen && (
+        <Modal
+          title={"Delete Promo"}
+          buttonText={"Delete Promo"}
+          onClose={resetPromoState}
+          onSubmit={() => handleDelete(selectedPromo?.id)}
+          isSubmitting={isSubmitting}
+        >
+          <p>Are you sure you want to delete this promo?</p>
         </Modal>
       )}
     </AdminLayout>
