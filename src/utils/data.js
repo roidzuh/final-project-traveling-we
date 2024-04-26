@@ -1,7 +1,6 @@
 import { HiHome, HiMap } from "react-icons/hi2";
 import { MdLocalOffer } from "react-icons/md";
 import { RiAdvertisementLine } from "react-icons/ri";
-import { BiHomeSmile } from "react-icons/bi";
 import { AiOutlineUser } from "react-icons/ai";
 import { BsGrid3X3Gap, BsCalendar } from "react-icons/bs";
 
