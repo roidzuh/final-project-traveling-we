@@ -39,12 +39,12 @@ export default function AdminLayout({ children }) {
       <div
         className={
           isFull
-            ? "tw-grid tw-w-[96%] tw-my-0 tw-mx-auto tw-gap-7 tw-grid-cols-[12rem_auto] tw-grid-rows-[1rem_auto] tw-transition-all tw-ease-in"
-            : "tw-grid tw-w-[96%] tw-my-0 tw-mx-auto tw-gap-7 tw-grid-cols-[4rem_auto] tw-grid-rows-[1rem_auto] tw-transition-all tw-ease-in"
+            ? "tw-grid tw-w-[96%] tw-my-0 tw-mx-auto tw-gap-7 tw-grid-cols-[4rem_auto] tw-grid-rows-[1rem_auto] tw-transition-all tw-ease-in"
+            : "tw-grid tw-w-[96%] tw-my-0 tw-mx-auto tw-gap-7 tw-grid-cols-[auto] tw-grid-rows-[1rem_auto] tw-transition-all tw-ease-in"
         }
       >
         <Header />
-        <Sidebar />
+        {isFull ? <Sidebar /> : null}
         <main className="tw-mt-7 tw-overflow-auto tw-h-[calc(100vh-6rem)] tw-min-h-[365px]">
           {children}
         </main>
