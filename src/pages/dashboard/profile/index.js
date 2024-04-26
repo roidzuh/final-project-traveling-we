@@ -102,16 +102,20 @@ export default function ProfilePageDashboard() {
       {isLoading ? (
         <Spinners />
       ) : (
-        <div className="tw-w-full tw-bg-slate-100 tw-h-[calc(100vh-10rem)] tw-min-h-[600px] tw-rounded-xl tw-p-4 tw-md:tw-p-8">
+        <div className="tw-w-full tw-bg-slate-100 tw-h-[calc(100vh-10rem)] tw-min-h-[750px] tw-rounded-xl tw-p-4 tw-md:tw-p-8">
           <div className="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center tw-justify-center">
             <div className="tw-text-center">
               <img
                 src={profile.profilePictureUrl}
                 alt={profile.name}
-                className="tw-w-full tw-max-w-xs tw-h-auto tw-rounded-xl tw-mx-auto"
+                className="tw-w-44 lg:tw-w-full tw-max-w-xs tw-h-44 lg:tw-h-auto tw-rounded-xl tw-mx-auto"
               />
               <div className="tw-flex tw-flex-col md:tw-flex-row tw-items-center tw-justify-center tw-gap-4 tw-mt-4">
-                <Input type="file" onChange={handleFileChange} />
+                <Input
+                  type="file"
+                  onChange={handleFileChange}
+                  style="tw-border-gray-300 tw-py-2 tw-px-3 file:tw-mr-4 file:tw-py-2 file:tw-px-4 file:tw-rounded-lg file:tw-border-0 file:tw-text-white file:tw-bg-blue-500 file:tw-cursor-pointer file:hover:tw-bg-blue-600"
+                />
                 <Button
                   title="Update image"
                   style={"tw-bg-blue-500 tw-text-white hover:tw-bg-blue-700"}
