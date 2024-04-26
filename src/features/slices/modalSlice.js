@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isEditModalOpen: false,
   isCreateModalOpen: false,
+  isDeleteModalOpen: false,
 };
 
 export const modalSlice = createSlice({
@@ -17,9 +18,14 @@ export const modalSlice = createSlice({
     toggleCreateModal: (state) => {
       state.isCreateModalOpen = !state.isCreateModalOpen;
     },
+    toggleDeleteModal: (state) => {
+      // Reducer untuk toggle modal konfirmasi
+      state.isDeleteModalOpen = !state.isDeleteModalOpen;
+    },
   },
 });
 
-export const { toggleEditModal, toggleCreateModal } = modalSlice.actions;
+export const { toggleEditModal, toggleCreateModal, toggleDeleteModal } =
+  modalSlice.actions;
 
 export default modalSlice.reducer;

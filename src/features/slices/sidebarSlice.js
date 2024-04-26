@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // Reducer
 const initialState = {
-  isFull: false,
+  isFull: true,
 };
 
 export const sidebarSlice = createSlice({
