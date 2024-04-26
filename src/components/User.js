@@ -20,14 +20,16 @@ export default function User() {
         <img
           src={user?.profilePictureUrl}
           alt="avatar"
-          className="tw-w-14 tw-h-14 tw-object-cover tw-rounded-full"
+          className="tw-w-8 tw-h-8 md:tw-w-14 md:tw-h-14 tw-object-cover tw-rounded-full"
         />
       </div>
       <div>
-        <h1 className="tw-text-xl tw-font-bold tw-text-gray-700">
+        <h1 className="tw-text-base md:tw-text-xl tw-font-bold tw-text-gray-700 tw-mb-0">
           {user?.name}
         </h1>
-        <p className="tw-text-sm tw-text-gray-500">{user?.email}</p>
+        <p className="tw-text-xs md:tw-text-base tw-text-gray-500 tw-mb-0">
+          {user?.email}
+        </p>
       </div>
       <ButtonIcon
         onClick={() => router.push("/dashboard/profile")}

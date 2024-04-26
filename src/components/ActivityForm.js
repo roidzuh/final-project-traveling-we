@@ -7,13 +7,13 @@ export default function ActivityForm({
 }) {
   return (
     <>
-      <div className="tw-font-bold tw-flex tw-flex-col">
+      <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
         <label>Category</label>
         <select
           name="categoryId"
           value={selectedActivity?.categoryId || ""}
           onChange={onInputChange}
-          className="tw-border tw-rounded tw-py-2 tw-px-3 tw-mb-4"
+          className="tw-border tw-rounded tw-py-2 tw-px-3 tw-mb-4 tw-w-full"
         >
           <option value="">Select Category</option>
           {categories.map((category) => (
@@ -23,7 +23,7 @@ export default function ActivityForm({
           ))}
         </select>
       </div>
-      <div className="tw-font-bold tw-flex tw-flex-col">
+      <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
         <label>Title</label>
         <Input
           name="title"
@@ -31,20 +31,21 @@ export default function ActivityForm({
           placeholder="Title"
           value={selectedActivity?.title || ""}
           onChange={onInputChange}
+          style="tw-w-full"
         />
       </div>
-      <div className="tw-font-bold tw-flex tw-flex-col">
+      <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
         <label>Description</label>
         <textarea
           name="description"
           rows={3}
-          className="tw-p-2 tw-rounded-xl tw-border tw-py-2 tw-px-3"
+          className="tw-p-2 tw-rounded-xl tw-border tw-py-2 tw-px-3 tw-w-full"
           placeholder="Description"
           value={selectedActivity?.description || ""}
           onChange={onInputChange}
         ></textarea>
       </div>
-      <div className="tw-font-bold tw-flex tw-flex-col">
+      <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
         <label>Price</label>
         <Input
           name="price"
@@ -53,9 +54,10 @@ export default function ActivityForm({
           value={selectedActivity?.price || ""}
           onChange={onInputChange}
           min="0"
+          style="tw-w-full"
         />
       </div>
-      <div className="tw-font-bold tw-flex tw-flex-col">
+      <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
         <label>Price Discount</label>
         <Input
           name="price_discount"
@@ -64,9 +66,10 @@ export default function ActivityForm({
           value={selectedActivity?.price_discount || ""}
           onChange={onInputChange}
           min="0"
+          style="tw-w-full"
         />
       </div>
-      <div className="tw-font-bold tw-flex tw-flex-col">
+      <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
         <label>Rating</label>
         <Input
           name="rating"
@@ -75,9 +78,10 @@ export default function ActivityForm({
           value={selectedActivity?.rating || ""}
           onChange={onInputChange}
           min="0"
+          style="tw-w-full"
         />
       </div>
-      <div className="tw-font-bold tw-flex tw-flex-col">
+      <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
         <label>Total Reviews</label>
         <Input
           name="total_reviews"
@@ -86,9 +90,10 @@ export default function ActivityForm({
           value={selectedActivity?.total_reviews || ""}
           onChange={onInputChange}
           min="0"
+          style="tw-w-full"
         />
       </div>
-      <div className="tw-font-bold tw-flex tw-flex-col">
+      <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
         <label>Facilities</label>
         <Input
           name="facilities"
@@ -96,9 +101,10 @@ export default function ActivityForm({
           placeholder="Facilities"
           value={selectedActivity?.facilities || ""}
           onChange={onInputChange}
+          style="tw-w-full"
         />
       </div>
-      <div className="tw-font-bold tw-flex tw-flex-col">
+      <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
         <label>Address</label>
         <Input
           name="address"
@@ -106,9 +112,10 @@ export default function ActivityForm({
           placeholder="Address"
           value={selectedActivity?.address || ""}
           onChange={onInputChange}
+          style="tw-w-full"
         />
       </div>
-      <div className="tw-font-bold tw-flex tw-flex-col">
+      <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
         <label>Province</label>
         <Input
           name="province"
@@ -116,9 +123,10 @@ export default function ActivityForm({
           placeholder="Province"
           value={selectedActivity?.province || ""}
           onChange={onInputChange}
+          style="tw-w-full"
         />
       </div>
-      <div className="tw-font-bold tw-flex tw-flex-col">
+      <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
         <label>City</label>
         <Input
           name="city"
@@ -126,9 +134,10 @@ export default function ActivityForm({
           placeholder="City"
           value={selectedActivity?.city || ""}
           onChange={onInputChange}
+          style="tw-w-full"
         />
       </div>
-      <div className="tw-font-bold tw-flex tw-flex-col">
+      <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
         <label>Location Map</label>
         <Input
           name="location_maps"
@@ -136,15 +145,16 @@ export default function ActivityForm({
           placeholder="Location Map"
           value={selectedActivity?.location_maps || ""}
           onChange={onInputChange}
+          style="tw-w-full"
         />
       </div>
-      <div className="tw-font-bold tw-flex tw-flex-col">
+      <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
         <label>Image</label>
         <Input
           name="image"
           type="file"
           onChange={onInputChange}
-          style="tw-border-gray-300 tw-py-2 tw-px-3 file:tw-mr-4 file:tw-py-2 file:tw-px-4 file:tw-rounded-lg file:tw-border-0 file:tw-text-white file:tw-bg-blue-500 file:tw-cursor-pointer file:hover:tw-bg-blue-600"
+          style="tw-border-gray-300 tw-py-2 tw-px-3 file:tw-mr-4 file:tw-py-2 file:tw-px-4 file:tw-rounded-lg file:tw-border-0 file:tw-text-white file:tw-bg-blue-500 file:tw-cursor-pointer file:hover:tw-bg-blue-600 tw-w-full"
         />
       </div>
     </>

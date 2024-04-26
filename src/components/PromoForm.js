@@ -3,7 +3,7 @@ import Input from "./Input";
 export default function PromoForm({ selectedPromo, onInputChange }) {
   return (
     <>
-      <div className="tw-font-bold tw-flex tw-flex-col">
+      <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base">
         <label>Title</label>
         <Input
           name="title"
@@ -13,7 +13,7 @@ export default function PromoForm({ selectedPromo, onInputChange }) {
           onChange={onInputChange}
         />
       </div>
-      <div className="tw-font-bold tw-flex tw-flex-col">
+      <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base">
         <label>Description</label>
         <textarea
           name="description"
@@ -25,7 +25,7 @@ export default function PromoForm({ selectedPromo, onInputChange }) {
         ></textarea>
       </div>
 
-      <div className="tw-font-bold tw-flex tw-flex-col">
+      <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base">
         <label>Terms & Conditions</label>
         <Input
           name="terms_condition"
@@ -35,7 +35,7 @@ export default function PromoForm({ selectedPromo, onInputChange }) {
           onChange={onInputChange}
         />
       </div>
-      <div className="tw-font-bold tw-flex tw-flex-col">
+      <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base">
         <label>Promo Code</label>
         <Input
           name="promo_code"
@@ -45,7 +45,7 @@ export default function PromoForm({ selectedPromo, onInputChange }) {
           onChange={onInputChange}
         />
       </div>
-      <div className="tw-font-bold tw-flex tw-flex-col">
+      <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base">
         <label>Promo Discount Price</label>
         <Input
           name="promo_discount_price"
@@ -56,7 +56,7 @@ export default function PromoForm({ selectedPromo, onInputChange }) {
           min="0"
         />
       </div>
-      <div className="tw-font-bold tw-flex tw-flex-col">
+      <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base">
         <label>Minimum Claim Price</label>
         <Input
           name="minimum_claim_price"
@@ -67,7 +67,7 @@ export default function PromoForm({ selectedPromo, onInputChange }) {
           min="0"
         />
       </div>
-      <div className="tw-font-bold tw-flex tw-flex-col">
+      <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base">
         <label>Image URL</label>
         <Input
           name="imageUrl"
