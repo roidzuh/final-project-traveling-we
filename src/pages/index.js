@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import MainLayout from "@/layout/MainLayout";
 import Hero from "@/components/Hero";
 import {
@@ -10,31 +11,44 @@ import Banner from "@/components/Banner";
 import Category from "@/components/Category";
 import Promo from "@/components/Promo";
 import Activity from "@/components/Activity";
+import Spinners from "@/components/Spinners";
 
-export async function getServerSideProps() {
-  try {
-    const dataBanners = await fetchBanners();
-    const banners = dataBanners?.data || [];
+export default function Home() {
+  const [banners, setBanners] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [promos, setPromos] = useState([]);
+  const [activities, setActivities] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-    const dataCategory = await fetchCategory();
-    const categories = dataCategory?.data || [];
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setIsLoading(true);
+        const dataBanners = await fetchBanners();
+        setBanners(dataBanners?.data || []);
 
-    const dataPromo = await fetchPromo();
-    const promos = dataPromo?.data || [];
+        const dataCategory = await fetchCategory();
+        setCategories(dataCategory?.data || []);
 
-    const dataActivity = await fetchActivity();
-    const activities = dataActivity?.data || [];
+        const dataPromo = await fetchPromo();
+        setPromos(dataPromo?.data || []);
 
-    return { props: { banners, categories, promos, activities } };
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return {
-      props: { banners: [], categories: [], promos: [], activities: [] },
-    };
+        const dataActivity = await fetchActivity();
+        setActivities(dataActivity?.data || []);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  if (isLoading) {
+    return <Spinners />;
   }
-}
 
-export default function Home({ banners, categories, promos, activities }) {
   return (
     <MainLayout>
       <Hero />
