@@ -19,7 +19,7 @@ export default function Sidebar() {
     if (!response.error) {
       router.replace("/login");
     } else {
-      toast.error(response.message);
+      toast.error("Something went wrong");
     }
     setLoading(false);
   };
