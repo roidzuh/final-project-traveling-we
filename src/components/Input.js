@@ -9,6 +9,7 @@ export default function Input({
 }) {
   return (
     <input
+      id={name}
       type={type}
       name={name}
       placeholder={placeholder}

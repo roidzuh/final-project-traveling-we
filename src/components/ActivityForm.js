@@ -8,8 +8,9 @@ export default function ActivityForm({
   return (
     <>
       <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
-        <label>Category</label>
+        <label htmlFor="categoryId">Category</label>
         <select
+          id="categoryId"
           name="categoryId"
           value={selectedActivity?.categoryId || ""}
           onChange={onInputChange}
@@ -24,7 +25,7 @@ export default function ActivityForm({
         </select>
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
-        <label>Title</label>
+        <label htmlFor="title">Title</label>
         <Input
           name="title"
           type="text"
@@ -35,8 +36,9 @@ export default function ActivityForm({
         />
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
-        <label>Description</label>
+        <label htmlFor="description">Description</label>
         <textarea
+          id="description"
           name="description"
           rows={3}
           className="tw-p-2 tw-rounded-xl tw-border tw-py-2 tw-px-3 tw-w-full"
@@ -46,7 +48,7 @@ export default function ActivityForm({
         ></textarea>
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
-        <label>Price</label>
+        <label htmlFor="price">Price</label>
         <Input
           name="price"
           type="number"
@@ -58,7 +60,7 @@ export default function ActivityForm({
         />
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
-        <label>Price Discount</label>
+        <label htmlFor="price_discount">Price Discount</label>
         <Input
           name="price_discount"
           type="number"
@@ -70,7 +72,7 @@ export default function ActivityForm({
         />
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
-        <label>Rating</label>
+        <label htmlFor="rating">Rating</label>
         <Input
           name="rating"
           type="number"
@@ -82,7 +84,7 @@ export default function ActivityForm({
         />
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
-        <label>Total Reviews</label>
+        <label htmlFor="total_reviews">Total Reviews</label>
         <Input
           name="total_reviews"
           type="number"
@@ -94,7 +96,7 @@ export default function ActivityForm({
         />
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
-        <label>Facilities</label>
+        <label htmlFor="facilities">Facilities</label>
         <Input
           name="facilities"
           type="text"
@@ -105,7 +107,7 @@ export default function ActivityForm({
         />
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
-        <label>Address</label>
+        <label htmlFor="address">Address</label>
         <Input
           name="address"
           type="text"
@@ -116,7 +118,7 @@ export default function ActivityForm({
         />
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
-        <label>Province</label>
+        <label htmlFor="province">Province</label>
         <Input
           name="province"
           type="text"
@@ -127,7 +129,7 @@ export default function ActivityForm({
         />
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
-        <label>City</label>
+        <label htmlFor="city">City</label>
         <Input
           name="city"
           type="text"
@@ -138,7 +140,7 @@ export default function ActivityForm({
         />
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
-        <label>Location Map</label>
+        <label htmlFor="location_maps">Location Map</label>
         <Input
           name="location_maps"
           type="text"
@@ -149,7 +151,7 @@ export default function ActivityForm({
         />
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
-        <label>Image</label>
+        <label htmlFor="image">Image</label>
         <Input
           name="image"
           type="file"

@@ -4,7 +4,7 @@ export default function CategoryForm({ selectedCategory, onInputChange }) {
   return (
     <>
       <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
-        <label>Name</label>
+        <label htmlFor="name">Name</label>
         <Input
           name="name"
           type="text"
@@ -15,7 +15,7 @@ export default function CategoryForm({ selectedCategory, onInputChange }) {
         />
       </div>
       <div className="tw-font-bold tw-flex tw-flex-col tw-text-sm sm:tw-text-base md:tw-text-lg">
-        <label>New Image File</label>
+        <label htmlFor="imageFile">New Image File</label>
         <Input
           name="imageFile"
           type="file"

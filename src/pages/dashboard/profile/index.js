@@ -128,7 +128,9 @@ export default function ProfilePageDashboard() {
               onSubmit={handleProfileUpdate}
             >
               <div className="tw-flex tw-flex-col tw-gap-2">
-                <label className="tw-font-semibold">Name</label>
+                <label htmlFor="name" className="tw-font-semibold">
+                  Name
+                </label>
                 <Input
                   placeholder="Name"
                   name="name"
@@ -138,7 +140,10 @@ export default function ProfilePageDashboard() {
                 />
               </div>
               <div className="tw-flex tw-flex-col tw-gap-2">
-                <label className="tw-font-semibold tw-text-gray-700">
+                <label
+                  htmlFor="email"
+                  className="tw-font-semibold tw-text-gray-700"
+                >
                   Email
                 </label>
                 <Input
@@ -150,7 +155,10 @@ export default function ProfilePageDashboard() {
                 />
               </div>
               <div className="tw-flex tw-flex-col tw-gap-2">
-                <label className="tw-font-semibold tw-text-gray-700">
+                <label
+                  htmlFor="phoneNumber"
+                  className="tw-font-semibold tw-text-gray-700"
+                >
                   Phone Number
                 </label>
                 <Input
