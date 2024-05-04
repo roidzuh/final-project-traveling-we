@@ -12,7 +12,7 @@ export default function Activity({ activities }) {
         Discover the latest activities in the world of technology and
         innovation.
       </p>
-      <div className="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 md:tw-grid-cols-3 tw-gap-4">
+      <div className="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 md:tw-grid-cols-3 tw-gap-4 tw-px-4 md:tw-px-16 lg:tw-px-16">
         {activities?.slice(0, 6).map((activity) => (
           <Link
             data-aos="fade-up"
