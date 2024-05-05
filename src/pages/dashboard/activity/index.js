@@ -128,19 +128,19 @@ export default function ActivityPageDashboard() {
       imageUrls: imageUrls,
     };
     if (
-      !selectedActivity.categoryId ||
-      !selectedActivity.title ||
-      !selectedActivity.description ||
-      !selectedActivity.price ||
-      !selectedActivity.price_discount ||
-      !selectedActivity.rating ||
-      !selectedActivity.total_reviews ||
-      !selectedActivity.facilities ||
-      !selectedActivity.address ||
-      !selectedActivity.province ||
-      !selectedActivity.city ||
-      !selectedActivity.location_maps ||
-      !selectedActivity.imageUrls
+      !activityData.categoryId ||
+      !activityData.title ||
+      !activityData.description ||
+      !activityData.price ||
+      !activityData.price_discount ||
+      !activityData.rating ||
+      !activityData.total_reviews ||
+      !activityData.facilities ||
+      !activityData.address ||
+      !activityData.province ||
+      !activityData.city ||
+      !activityData.location_maps ||
+      !activityData.imageUrls[0]
     ) {
       toast.error("All fields must be filled");
       setIsSubmitting(false);
