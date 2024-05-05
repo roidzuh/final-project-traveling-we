@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <Component {...pageProps} />
-      <ToastContainer position="top-center" />
+      <ToastContainer position="top-center" closeOnClick={true} />
     </Provider>
   );
 }
