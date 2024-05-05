@@ -31,7 +31,7 @@ export default function Category({ categories }) {
   };
 
   return (
-    <div className="tw-absolute tw-w-full  " data-aos="fade-up">
+    <section className="tw-absolute tw-w-full  " data-aos="fade-up">
       <div className="tw-relative tw-bottom-64 tw-text-center">
         <div className="tw-pb-4 tw-text-slate-200">
           <h2>Popular Destinations</h2>
@@ -58,6 +58,6 @@ export default function Category({ categories }) {
           </Slider>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

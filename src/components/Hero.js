@@ -2,7 +2,7 @@
 
 export default function Hero() {
   return (
-    <div
+    <section
       className="tw-relative tw-min-h-[600px] tw-h-screen tw-text-center tw-bg-cover tw-bg-center"
       style={{
         backgroundImage:
@@ -24,6 +24,6 @@ export default function Hero() {
           style="tw-bg-blue-600 hover:tw-bg-blue-700 tw-text-white tw-font-bold tw-py-3 tw-px-6"
         /> */}
       </div>
-    </div>
+    </section>
   );
 }

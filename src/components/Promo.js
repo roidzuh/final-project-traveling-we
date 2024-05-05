@@ -37,7 +37,7 @@ export default function Promo({ promos }) {
     ],
   };
   return (
-    <div className="tw-mt-96 tw-py-4 tw-px-16 tw-bg-slate-200 tw-text-gray-600 tw-mb-16 tw-rounded-md">
+    <section className="tw-mt-96 tw-py-4 tw-px-16 tw-bg-slate-200 tw-text-gray-600 tw-mb-16 tw-rounded-md">
       <h2 className="tw-text-2xl tw-font-bold tw-mb-4 tw-text-center">
         Best Promotions
       </h2>
@@ -84,6 +84,6 @@ export default function Promo({ promos }) {
       <div className="tw-mt-12 tw-text-center">
         <ButtonLink href="/promo" title="View All Promotions" />
       </div>
-    </div>
+    </section>
   );
 }

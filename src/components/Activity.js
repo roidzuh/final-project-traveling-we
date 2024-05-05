@@ -4,7 +4,7 @@ import { FaStar, FaLocationDot } from "react-icons/fa6";
 
 export default function Activity({ activities }) {
   return (
-    <div className="tw-bg-slate-200 tw-p-4 tw-text-gray-800 tw-px-4 sm:tw-px-6 lg:tw-px-8 tw-py-6 sm:tw-py-8 lg:tw-py-10 tw-rounded-lg tw-shadow-lg">
+    <section className="tw-bg-slate-200 tw-p-4 tw-text-gray-800 tw-px-4 sm:tw-px-6 lg:tw-px-8 tw-py-6 sm:tw-py-8 lg:tw-py-10 tw-rounded-lg tw-shadow-lg">
       <h2 className="tw-text-2xl tw-font-bold tw-mb-4 tw-text-center">
         Explore Activities
       </h2>
@@ -61,6 +61,6 @@ export default function Activity({ activities }) {
           className="tw-bg-blue-500 tw-text-white tw-font-bold tw-rounded-lg tw-px-6 tw-py-2 hover:tw-bg-blue-600"
         />
       </div>
-    </div>
+    </section>
   );
 }

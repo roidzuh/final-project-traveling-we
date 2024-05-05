@@ -13,7 +13,7 @@ export default function Banner({ banners }) {
   };
 
   return (
-    <div
+    <section
       className="tw-bg-white tw-text-gray-600 tw-w-full tw-mb-16 tw-mt-16"
       data-aos="fade-up"
     >
@@ -33,6 +33,6 @@ export default function Banner({ banners }) {
           </div>
         ))}
       </Slider>
-    </div>
+    </section>
   );
 }
