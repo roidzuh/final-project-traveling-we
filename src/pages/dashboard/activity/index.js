@@ -139,7 +139,8 @@ export default function ActivityPageDashboard() {
       !selectedActivity.address ||
       !selectedActivity.province ||
       !selectedActivity.city ||
-      !selectedActivity.location_maps
+      !selectedActivity.location_maps ||
+      !selectedActivity.imageUrls
     ) {
       toast.error("All fields must be filled");
       setIsSubmitting(false);
