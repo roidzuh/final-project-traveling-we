@@ -89,7 +89,9 @@ export default function ProfilePageDashboard() {
       } else {
         localStorage.setItem("user", JSON.stringify(profile));
         toast.success("Profile updated successfully.");
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       }
     } catch (error) {
       toast.error("Failed to update profile.");
